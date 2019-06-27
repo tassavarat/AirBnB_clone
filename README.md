@@ -1,4 +1,6 @@
-![alt text](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUXW7JF5MT%2F20190627%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20190627T162017Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=716fddf7f4b8819f05f332dcf22cea347c8c1dd8dc85118381a7baacc09902cd)
+<p align="center">
+  <img src="http://www.holbertonschool.com/holberton-logo.png">
+</p>
 
 # AirBnB_clone
 * This repository contains a full-stack clone of AirBnB divided into 6 parts:
@@ -33,7 +35,9 @@ Example of final product:
 * MySQL
 * Javascript
 * HTML
-![alt text](https://imgur.com/a/kS1SOl4)
+<p align="center">
+  <img src="https://imgur.com/a/kS1SOl4">
+</p>
 
 # Usage
 
