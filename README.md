@@ -7,15 +7,15 @@
   * Console
     * Creation of data model
     * Management (create, update, destroy, etc.) of objects via command interpreter
-    * Storage and persistence of objects (JSON format)
+    * Storage of persistent objects (JSON format)
   * Web static
     * HTML/CSS
-    * Templates of each object
+    * Templates
   * MySQL storage
-    * Replacement of file storage with database storage
+    * Replacement of local file storage with database
     * Using O.R.M. to map models
   * Web framework - templating
-    * Deployment of web server in Python
+    * Deployment of web servers in Python
     * Dynamic HTML elements using objects stored in database
   * RESTful API
     * JSON web interface to display all objects
