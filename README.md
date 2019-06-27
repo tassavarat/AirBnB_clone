@@ -26,7 +26,7 @@
 
 Example of final product:
 <p align="center">
-  <img src="https://i.imgur.com/lgZnZrz.png">
+  <img src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/8-index.png">
 </p>
 
 # Techstack
@@ -36,7 +36,7 @@ Example of final product:
 * Javascript
 * HTML
 <p align="center">
-  <img src="https://imgur.com/a/kS1SOl4">
+  <img src="https://i.imgur.com/lgZnZrz.png">
 </p>
 
 # Usage
