@@ -19,7 +19,8 @@ class BaseModel():
 
     def __str__(self):
         """Prints : [<class name>] (<self.id>) <self.__dict__>"""
-        return "[{}] () ".format(type(self), self.id, self.__dict__)
+        cls_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(cls_name, self.id, self.__dict__)
 
     def save(self):
         """Updates the public instance attribute updated_at with
@@ -30,4 +31,10 @@ class BaseModel():
         """Returns a dictionary containing all keys/values of
         __dict__ of the instance."""
         d = {}
+        for k, v in self.__dict__.items():
+            if k == "created_at" or k == "updated_at":
+                d[k] = dt.isoformat(v)
+            else:
+                d[k] = v
+        d["__class__"] = self.__class__.__name__
         return d
