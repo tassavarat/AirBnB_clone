@@ -6,6 +6,7 @@ This module contains the prototype for BaseModel class.
 
 from uuid import uuid4
 from datetime import datetime as dt
+import storage
 
 
 class BaseModel():
@@ -16,13 +17,16 @@ class BaseModel():
         if kwargs:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
-                    setattr(k, dt.strptime(v, "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(self, k, dt.strptime(v, "%Y-%m-%dT%H:%M:%S.%f"))
+                elif k == "__class__":
+                    continue
                 else:
                     setattr(self, k, v)
         else:
             self.id = str(uuid4())
             self.created_at = dt.utcnow()
             self.updated_at = dt.utcnow()
+            storage.new(self)
 
     def __str__(self):
         """Prints : [<class name>] (<self.id>) <self.__dict__>"""
@@ -32,6 +36,7 @@ class BaseModel():
     def save(self):
         """Updates the public instance attribute updated_at with
         the current datetime."""
+        storage.save(self)
         self.updated_at = dt.utcnow()
 
     def to_dict(self):

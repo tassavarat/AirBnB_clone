@@ -3,11 +3,54 @@
 """
 This module contains the prototype for BaseModel class.
 """
+import json
+from os import path
 
 
 class FileStorage:
     """FileStorage class."""
 
-    def __init__(self):
+    def __init__(self, __file_path, __objects):
         """Initialize FileStorage."""
+        self.file_path = __file_path
+        self.objects = __objects
 
+    @property
+    def file_path(self):
+        """Assigns value to file_path"""
+        return self.__file_path
+
+    @property
+    def objects(self):
+        """Assigns value to objects"""
+        return self.__objects
+
+    @file_path.setter
+    def file_path(self, val):
+        self.__file_path = val
+
+    @objects.setter
+    def objects(self, val):
+        self.__objects = val
+
+    def all(self):
+        """Returns the dictionary __objects"""
+        self.objects
+
+    def new(self, obj):
+        """Sets in __objects the ob with key <obj class name>.id"""
+        self.__objects[obj.__class__.__name__] = obj
+
+    def save(self):
+        """Serialises __objects to the JSON file (path: __file_path)"""
+        with open(self.__file_path, mode='w') as f:
+            f.write(json.dumps(self.__objects))
+
+    def reload(self):
+        """Deserialises the JSON file to __objects (only if the JSON file
+        (__file_path) exists ; otherwise, do nothing. If the file doesn’t
+        exist, no exception should be raised)
+        """
+        if path.isfile(self.__file_path):
+            with open(self.__file_path) as f:
+                self.__objects = json.loads(f.read())
