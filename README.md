@@ -1,6 +1,9 @@
 <p align="center">
   <img src="http://www.holbertonschool.com/holberton-logo.png">
 </p>
+<p align="center">
+  <img src="https://i.imgur.com/ogbfW3k.png">
+</p>
 
 # AirBnB_clone
 * This repository contains a full-stack clone of AirBnB divided into 6 parts:
