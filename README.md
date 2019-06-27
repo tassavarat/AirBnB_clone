@@ -33,7 +33,7 @@ Example of final product:
 * MySQL
 * Javascript
 * HTML
-![alt text](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/d2d06462824fab5846f3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUXW7JF5MT%2F20190627%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20190627T170208Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=b62b3b761f4d8f7a1787c25c33cc29c163e32d933bd97cabeb04c423cac4ead5)
+![alt text](https://imgur.com/a/kS1SOl4)
 
 # Usage
 
