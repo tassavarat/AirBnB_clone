@@ -11,11 +11,18 @@ from datetime import datetime as dt
 class BaseModel():
     """BaseModel class."""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initialize BaseModel."""
-        self.id = str(uuid4())
-        self.created_at = dt.utcnow()
-        self.updated_at = dt.utcnow()
+        if kwargs:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    setattr(k, dt.strptime(v, "%Y-%m-%dT%H:%M:%S.%f"))
+                else:
+                    setattr(self, k, v)
+        else:
+            self.id = str(uuid4())
+            self.created_at = dt.utcnow()
+            self.updated_at = dt.utcnow()
 
     def __str__(self):
         """Prints : [<class name>] (<self.id>) <self.__dict__>"""
