@@ -1,7 +1,4 @@
 <p align="center">
-  <img src="http://www.holbertonschool.com/holberton-logo.png">
-</p>
-<p align="center">
   <img src="https://i.imgur.com/ogbfW3k.png">
 </p>
 
