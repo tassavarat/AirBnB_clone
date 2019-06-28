@@ -15,6 +15,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     valid_models = ["BaseModel", "User", "State", "City", "Amenity", "Place",
                     "Review"]
+    valid_cmds = ["all", "count", "show", "destroy", "update"]
 
     def do_quit(self, line):
         """Quit command to exit the program
@@ -128,6 +129,25 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
             else:
                 print("** no instance found **")
+
+    def default(self, inp):
+        """ TO DO """
+        if '.' not in inp:
+            return
+        cls_name = inp.split('.')[0]
+        if cls_name not in HBNBCommand.valid_models:
+            return
+        cmd = inp.split('.')[1]
+        if '(' not in cmd and ')' not in cmd:
+            return
+        cmd_left = cmd.split('(')[0]
+        cmd_right = cmd.split('(')[-1][:-1]
+        if cmd_left not in HBNBCommand.valid_cmds:
+            return
+        if cmd_left == "all":
+            return self.do_all(cls_name)
+        if cmd_left == "show":
+            return self.do_show(cls_name + " " + cmd_right)
 
 
 if __name__ == "__main__":
