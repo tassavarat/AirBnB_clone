@@ -17,13 +17,7 @@ class BaseModel():
         if kwargs:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
-                    if v.__class__.__name__ != "datetime":
-                        raise TypeError("must be a datetime object")
                     setattr(self, k, dt.strptime(v, "%Y-%m-%dT%H:%M:%S.%f"))
-                elif k == "id":
-                    if type(v) != str:
-                        raise TypeError("id must be a string")
-                    setattr(self, k, v)
                 elif k == "__class__":
                     continue
                 else:
