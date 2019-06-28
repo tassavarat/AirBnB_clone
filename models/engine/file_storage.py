@@ -10,10 +10,10 @@ from os import path
 class FileStorage:
     """FileStorage class."""
 
-    def __init__(self):
+    def __init__(self, __file_path, __objects):
         """Initialize FileStorage."""
-        self.file_path = "file.json"
-        self.objects = {}
+        self.file_path = __file_path
+        self.objects = __objects
 
     @property
     def file_path(self):
@@ -35,26 +35,22 @@ class FileStorage:
 
     def all(self):
         """Returns the dictionary __objects"""
-        return self.objects
+        self.objects
 
     def new(self, obj):
         """Sets in __objects the ob with key <obj class name>.id"""
-        self.__objects[obj.__class__.__name__] = obj.to_dict()
+        self.__objects[obj.__class__.__name__] = obj
 
     def save(self):
         """Serialises __objects to the JSON file (path: __file_path)"""
         with open(self.__file_path, mode='w') as f:
-            print(self.__objects)
-            json.dump(self.__objects, f)
+            f.write(json.dumps(self.__objects))
 
     def reload(self):
         """Deserialises the JSON file to __objects (only if the JSON file
         (__file_path) exists ; otherwise, do nothing. If the file doesn’t
         exist, no exception should be raised)
         """
-        if not self.__file_path:
-            return
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
-                print(f.read())
                 self.__objects = json.loads(f.read())
