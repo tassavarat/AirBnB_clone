@@ -3,9 +3,9 @@
 """
 This module contains the prototype for BaseModel class.
 """
+from models.base_model import BaseModel
 import json
 from os import path
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -60,10 +60,4 @@ class FileStorage:
                 loads = json.load(f)
                 for k, v in loads.items():
                     cls = v["__class__"]
-                    print("==")
-                    print(cls)
-                    print("==")
                     self.new(eval(cls)(**v))
-                """
-                self.__objects = loads
-                """
