@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(params) == 2:
             print("** attribute name missing **")
         elif len(params) == 3:
-            print("* value missing **")
+            print("** value missing **")
         elif params[0] not in HBNBCommand.valid_models:
             print("** class doesn't exist **")
         else:
@@ -125,29 +125,62 @@ class HBNBCommand(cmd.Cmd):
                 pass
             k = params[0] + '.' + params[1]
             if k in models.storage.all():
-                setattr(models.storage.all()[k], params[2], params[3][1:-1])
+                setattr(models.storage.all()[k], params[2],
+                        params[3])
                 models.storage.save()
             else:
                 print("** no instance found **")
 
+    def do_count(self, args):
+        """Retrieves the number of instances of a class."""
+        params = args.split()
+        if len(params) == 0:
+            print("** class name missing **")
+        print(len([k for k in models.storage.all().keys()
+              if k.split('.')[0] == params[0]]))
+
     def default(self, inp):
-        """ TO DO """
+        """Converts custom user input into commands"""
         if '.' not in inp:
+            print("** invalid input **")
             return
         cls_name = inp.split('.')[0]
         if cls_name not in HBNBCommand.valid_models:
+            print("** class doesn't exist **")
             return
         cmd = inp.split('.')[1]
         if '(' not in cmd and ')' not in cmd:
+            print("** invalid input **")
             return
         cmd_left = cmd.split('(')[0]
         cmd_right = cmd.split('(')[-1][:-1]
         if cmd_left not in HBNBCommand.valid_cmds:
+            print("** invalid command **")
             return
         if cmd_left == "all":
             return self.do_all(cls_name)
+        if cmd_left == "count":
+            return self.do_count(cls_name)
         if cmd_left == "show":
             return self.do_show(cls_name + " " + cmd_right)
+        if cmd_left == "destroy":
+            return self.do_destroy(cls_name + " " + cmd_right)
+        if cmd_left == "update":
+            if '{' in cmd_right and '}':
+                index = cmd_right.index(',')
+                cls_id = cmd_right[:index].replace("\"", "")
+                string_d = cmd_right[index + 1:]
+                d = eval(string_d)
+                for k, v in d.items():
+                    arg = ""
+                    arg += cls_name + " " + cls_id + " " + k + " " + str(v)
+                    self.do_update(arg)
+            else:
+                arg = ""
+                arg += cls_name + " "
+                for i in cmd_right.split(', '):
+                    arg += i.replace("\"", "") + " "
+                return self.do_update(arg)
 
 
 if __name__ == "__main__":
