@@ -127,12 +127,18 @@ class BaseModel_Test(unittest.TestCase):
         self.assertTrue(hasattr(b, "id"))
         self.assertTrue(hasattr(b, "created_at"))
         self.assertTrue(hasattr(b, "updated_at"))
-"""
+
     def test_10_manual_kwargs(self):
-        Test for manually entering in kwargs.
-        with self.assertRaises(TypeError):
-            b = BaseModel()
-"""
+        """Test for manually entering in kwargs."""
+        b = BaseModel(id="74873652-ee4b-4eb4-8b92-6ccd09993bad",
+                      created_at="2019-06-28T13:33:31.943447",
+                      updated_at="2019-06-28T13:33:31.943460",
+                      name="Tu")
+        self.assertTrue(hasattr(b, "id"))
+        self.assertTrue(hasattr(b, "created_at"))
+        self.assertTrue(hasattr(b, "updated_at"))
+        self.assertTrue(hasattr(b, "name"))
+
 
 if __name__ == '__main__':
     unittest.main()
