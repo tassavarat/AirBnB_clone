@@ -1,1 +1,1 @@
-{"BaseModel": {"__class__": "BaseModel", "id": "c137c64c-4af6-4e63-bbc6-50719a433f06", "created_at": "2019-06-28T00:30:38.982880", "updated_at": "2019-06-28T00:30:38.982885"}}
+{"BaseModel.79e83f66-b806-4daa-a242-159079c42fd9": {"my_number": 89, "updated_at": "2019-06-28T00:54:46.887417", "name": "Holberton", "created_at": "2019-06-28T00:54:46.887410", "id": "79e83f66-b806-4daa-a242-159079c42fd9", "__class__": "BaseModel"}}
