@@ -6,7 +6,7 @@ This module contains the prototype for BaseModel class.
 
 from uuid import uuid4
 from datetime import datetime as dt
-import storage
+from models import storage
 
 
 class BaseModel():
@@ -36,7 +36,7 @@ class BaseModel():
     def save(self):
         """Updates the public instance attribute updated_at with
         the current datetime."""
-        storage.save(self)
+        storage.save()
         self.updated_at = dt.utcnow()
 
     def to_dict(self):
