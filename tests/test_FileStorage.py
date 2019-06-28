@@ -49,6 +49,13 @@ class FileStorage_Test(unittest.TestCase):
         with self.assertRaises(KeyError):
             self.assertTrue(storage.all()[12345] is None)
 
+    def test_04_working_new(self):
+        """Test to validate if new works."""
+        b = BaseModel()
+        key = "BaseModel" + "." + b.id
+        storage.new(b)
+        self.assertTrue(storage.all()[key].__class__.__name__, "BaseModel")
+
 
 if __name__ == '__main__':
     unittest.main()

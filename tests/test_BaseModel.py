@@ -7,6 +7,7 @@ Unittest for BaseModel
 import unittest
 import re
 from time import sleep
+from models import storage
 from models.base_model import BaseModel
 
 
@@ -15,7 +16,7 @@ class BaseModel_Test(unittest.TestCase):
 
     def setUp(self):
         """Set up tests."""
-        pass
+        storage.reset()
 
     def test_00_class_type(self):
         """Test for correct class type."""
