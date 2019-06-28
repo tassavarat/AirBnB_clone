@@ -53,10 +53,50 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             k = params[0] + '.' + params[1]
-            print(models.storage.all()[k])
+            if k in models.storage.all():
+                print(models.storage.all()[k])
+            else:
+                print("** no instance found **")
         except Exception as e:
             print(e.__class__.__name__)
             print("** class doesn't exist **")
+
+    def do_destroy(self, args=None):
+        params = args.split()
+        if len(params) == 0:
+            print("** class name missing **")
+            return
+        if len(params) == 1:
+            print("** instance id missing **")
+            return
+        try:
+            k = params[0] + '.' + params[1]
+            if k in models.storage.all():
+                del models.storage.all()[k]
+                models.storage.save()
+            else:
+                print("** no instance found **")
+        except Exception as e:
+            # print(e.__class__.__name__)
+            print("** class doesn't exist **")
+
+    def do_all(self, cls_name=None):
+        params = cls_name.split()
+        str_list = []
+        if len(params) == 0:
+            for v in models.storage.all().values():
+                str_list.append(str(v))
+            print(str_list)
+            return
+        valid_models = ["BaseModel"]
+        if cls_name not in valid_models:
+            print("** class doesn't exist **")
+            return
+        for k, v in models.storage.all().items():
+            left = k.split('.')[0]
+            if left == cls_name:
+                str_list.append(str(v))
+        print(str_list)
 
 
 if __name__ == "__main__":
