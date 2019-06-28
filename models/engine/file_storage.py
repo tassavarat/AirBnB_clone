@@ -39,7 +39,8 @@ class FileStorage:
 
     def new(self, obj):
         """Sets in __objects the ob with key <obj class name>.id"""
-        self.__objects[obj.__class__.__name__] = obj.to_dict()
+        k = obj.__class__.__name__ + "." + obj.id
+        self.__objects[k] = obj.to_dict()
 
     def save(self):
         """Serialises __objects to the JSON file (path: __file_path)"""
@@ -51,8 +52,6 @@ class FileStorage:
         (__file_path) exists ; otherwise, do nothing. If the file doesn’t
         exist, no exception should be raised)
         """
-        if not self.__file_path:
-            return
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
-                self.__objects = json.loads(f.read())
+                self.__objects = json.load(f)
