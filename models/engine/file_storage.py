@@ -13,30 +13,12 @@ class FileStorage:
 
     def __init__(self):
         """Initialize FileStorage."""
-        self.file_path = "file.json"
-        self.objects = {}
-
-    @property
-    def file_path(self):
-        """Assigns value to file_path"""
-        return self.__file_path
-
-    @property
-    def objects(self):
-        """Assigns value to objects"""
-        return self.__objects
-
-    @file_path.setter
-    def file_path(self, val):
-        self.__file_path = val
-
-    @objects.setter
-    def objects(self, val):
-        self.__objects = val
+        self.__file_path = "file.json"
+        self.__objects = {}
 
     def all(self):
         """Returns the dictionary __objects"""
-        return self.objects
+        return self.__objects
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id"""
@@ -61,3 +43,7 @@ class FileStorage:
                 for k, v in loads.items():
                     cls = v["__class__"]
                     self.new(eval(cls)(**v))
+
+    def reset(self):
+        """Reset all objects in __objects."""
+        self.__objects = {}

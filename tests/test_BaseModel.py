@@ -5,14 +5,13 @@ Unittest for BaseModel
 """
 
 import unittest
-import os
 import re
 from time import sleep
 from models.base_model import BaseModel
 
 
 class BaseModel_Test(unittest.TestCase):
-    """Tests for base class."""
+    """Tests for BaseModel class."""
 
     def setUp(self):
         """Set up tests."""
