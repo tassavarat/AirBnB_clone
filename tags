@@ -1,0 +1,34 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BaseModel	models/base_model.py	/^class BaseModel():$/;"	c
+FileStorage	models/engine/file_storage.py	/^class FileStorage:$/;"	c
+__init__	models/base_model.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:BaseModel
+__init__	models/engine/file_storage.py	/^    def __init__(self):$/;"	m	class:FileStorage
+__str__	models/base_model.py	/^    def __str__(self):$/;"	m	class:BaseModel	file:
+all	models/engine/file_storage.py	/^    def all(self):$/;"	m	class:FileStorage
+all_objs	test_save_reload_base_model.py	/^all_objs = storage.all()$/;"	v
+all_objs	test_save_reload_user.py	/^all_objs = storage.all()$/;"	v
+file_path	models/engine/file_storage.py	/^    def file_path(self):$/;"	m	class:FileStorage
+file_path	models/engine/file_storage.py	/^    def file_path(self, val):$/;"	m	class:FileStorage
+my_model	test_base_model.py	/^my_model = BaseModel()$/;"	v
+my_model	test_base_model_dict.py	/^my_model = BaseModel()$/;"	v
+my_model	test_save_reload_base_model.py	/^my_model = BaseModel()$/;"	v
+my_model_json	test_base_model.py	/^my_model_json = my_model.to_dict()$/;"	v
+my_model_json	test_base_model_dict.py	/^my_model_json = my_model.to_dict()$/;"	v
+my_new_model	test_base_model_dict.py	/^my_new_model = BaseModel(**my_model_json)$/;"	v
+my_user	test_save_reload_user.py	/^my_user = User()$/;"	v
+my_user2	test_save_reload_user.py	/^my_user2 = User()$/;"	v
+new	models/engine/file_storage.py	/^    def new(self, obj):$/;"	m	class:FileStorage
+obj	test_save_reload_base_model.py	/^    obj = all_objs[obj_id]$/;"	v
+obj	test_save_reload_user.py	/^    obj = all_objs[obj_id]$/;"	v
+objects	models/engine/file_storage.py	/^    def objects(self):$/;"	m	class:FileStorage
+objects	models/engine/file_storage.py	/^    def objects(self, val):$/;"	m	class:FileStorage
+reload	models/engine/file_storage.py	/^    def reload(self):$/;"	m	class:FileStorage
+save	models/base_model.py	/^    def save(self):$/;"	m	class:BaseModel
+save	models/engine/file_storage.py	/^    def save(self):$/;"	m	class:FileStorage
+storage	models/__init__.py	/^storage = FileStorage()$/;"	v
+to_dict	models/base_model.py	/^    def to_dict(self):$/;"	m	class:BaseModel
