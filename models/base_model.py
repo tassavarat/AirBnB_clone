@@ -8,7 +8,6 @@ from uuid import uuid4
 from datetime import datetime as dt
 from models import storage
 
-
 class BaseModel():
     """BaseModel class."""
 

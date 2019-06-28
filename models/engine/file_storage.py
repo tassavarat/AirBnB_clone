@@ -5,6 +5,7 @@ This module contains the prototype for BaseModel class.
 """
 import json
 from os import path
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -56,4 +57,13 @@ class FileStorage:
         """
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
-                self.__objects = json.load(f)
+                loads = json.load(f)
+                for k, v in loads.items():
+                    cls = v["__class__"]
+                    print("==")
+                    print(cls)
+                    print("==")
+                    self.new(eval(cls)(**v))
+                """
+                self.__objects = loads
+                """
