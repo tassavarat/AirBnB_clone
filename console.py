@@ -82,20 +82,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, cls_name=None):
         params = cls_name.split()
+        valid_models = ["BaseModel"]
         str_list = []
         if len(params) == 0:
             for v in models.storage.all().values():
                 str_list.append(str(v))
-            print(str_list)
-            return
-        valid_models = ["BaseModel"]
-        if cls_name not in valid_models:
-            print("** class doesn't exist **")
-            return
-        for k, v in models.storage.all().items():
-            left = k.split('.')[0]
-            if left == cls_name:
-                str_list.append(str(v))
+        else:
+            if cls_name not in valid_models:
+                print("** class doesn't exist **")
+                return
+            for k, v in models.storage.all().items():
+                left = k.split('.')[0]
+                if left == cls_name:
+                    str_list.append(str(v))
         print(str_list)
 
 
