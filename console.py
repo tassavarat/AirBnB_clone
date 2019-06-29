@@ -1,16 +1,15 @@
 #!/usr/bin/python3
-
-"""
-Entry point of the command interpreter
-"""
+"""Entry point of the command interpreter"""
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 import models
 
 
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand class"""
     prompt = "(hbnb) "
+    valid_models = ["BaseModel", "User"]
 
     def do_quit(self, line):
         """Quit command to exit the program
@@ -26,11 +25,11 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         return
 
-    def do_create(self, cls=None):
+    def do_create(self, cls):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
         and prints the id
         """
-        if cls is None:
+        if not cls:
             print("** class name missing **")
             return
         try:
@@ -40,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
-    def do_show(self, args=None):
+    def do_show(self, args):
         """Prints the string representation of an instance based on the class
         name and id
         """
@@ -60,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
                 print(e.__class__.__name__)
                 print("** class doesn't exist **")
 
-    def do_destroy(self, args=None):
+    def do_destroy(self, args):
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
@@ -75,18 +74,15 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** no instance found **")
             except Exception as e:
-                # print(e.__class__.__name__)
                 print("** class doesn't exist **")
 
-    def do_all(self, cls_name=None):
-        valid_models = ["BaseModel"]
-        params = cls_name.split()
+    def do_all(self, cls_name):
         str_list = []
-        if len(params) == 0:
+        if not cls_name:
             for v in models.storage.all().values():
                 str_list.append(str(v))
         else:
-            if cls_name not in valid_models:
+            if cls_name not in HBNBCommand.valid_models:
                 print("** class doesn't exist **")
                 return
             for k, v in models.storage.all().items():
@@ -96,7 +92,6 @@ class HBNBCommand(cmd.Cmd):
         print(str_list)
 
     def do_update(self, args=None):
-        valid_models = ["BaseModel"]
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
@@ -106,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(params) == 3:
             print("* value missing **")
-        elif params[0] not in valid_models:
+        elif params[0] not in HBNBCommand.valid_models:
             print("** class doesn't exist **")
         else:
             try:
@@ -116,14 +111,12 @@ class HBNBCommand(cmd.Cmd):
                     params[3] = float(params[3])
             except ValueError:
                 pass
-            for k, v in models.storage.all().items():
-                left = k.split('.')[0]
-                right = k.split('.')[1]
-                if left == params[0] and right == params[1]:
-                    setattr(v, params[2], params[3])
-                    models.storage.save()
-                else:
-                    print("** no instance found **")
+            k = params[0] + '.' + params[1]
+            if k in models.storage.all():
+                setattr(models.storage.all()[k], params[2], params[3][1:-1])
+                models.storage.save()
+            else:
+                print("** no instance found **")
 
 
 if __name__ == "__main__":
