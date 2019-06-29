@@ -339,7 +339,7 @@ Quit command to exit the program
     * id, created_at and updated_at cant’ be updated. You can assume they won’t be passed in the update command
     * Only “simple” arguments can be updated: string, integer and float. You can assume nobody will try to update list of ids or datetime
 ```sh
-  guillaume@ubuntu:~/AirBnB$ ./console.py
+guillaume@ubuntu:~/AirBnB$ ./console.py
 (hbnb) all MyModel
 ** class doesn't exist **
 (hbnb) show BaseModel
@@ -484,7 +484,7 @@ guillaume@ubuntu:~/AirBnB$ cat file.json ; echo ""
 ### [ 11. All instances by class name ](./models/engine/file_storage)
 * Update your command interpreter (console.py) to retrieve all instances of a class by using: <class name>.all()
 ```sh
-  guillaume@ubuntu:~/AirBnB$ ./console.py
+guillaume@ubuntu:~/AirBnB$ ./console.py
 (hbnb) User.all()
 [[User] (246c227a-d5c1-403d-9bc7-6a47bb9f0f68) {'first_name': 'Betty', 'last_name': 'Holberton', 'created_at': datetime.datetime(2017, 9, 28, 21, 12, 19, 611352), 'updated_at': datetime.datetime(2017, 9, 28, 21, 12, 19, 611363), 'password': '63a9f0ea7bb98050796b649e85481845', 'email': 'airbnb@holbertonshool.com', 'id': '246c227a-d5c1-403d-9bc7-6a47bb9f0f68'}, [User] (38f22813-2753-4d42-b37c-57a17f1e4f88) {'first_name': 'Betty', 'last_name': 'Holberton', 'created_at': datetime.datetime(2017, 9, 28, 21, 11, 42, 848279), 'updated_at': datetime.datetime(2017, 9, 28, 21, 11, 42, 848291), 'password': 'b9be11166d72e9e3ae7fd407165e4bd2', 'email': 'airbnb@holbertonshool.com', 'id': '38f22813-2753-4d42-b37c-57a17f1e4f88'}]
 ```
@@ -492,7 +492,7 @@ guillaume@ubuntu:~/AirBnB$ cat file.json ; echo ""
 ### [ 12. Count instances ](./console.py)
 * Update your command interpreter (console.py) to retrieve the number of instances of a class: <class name>.count().
 ```sh
-  guillaume@ubuntu:~/AirBnB$ ./console.py
+guillaume@ubuntu:~/AirBnB$ ./console.py
 (hbnb) User.count()
 2
 ```
