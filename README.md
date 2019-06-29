@@ -5,8 +5,9 @@
 # AirBnB_clone
 * This repository contains a full-stack clone of AirBnB divided into 6 parts:
 
-|           Console          	| * Creation of data model * Management (create, update, destroy, etc.) of objects via command interpreter * Storage of persistent objects (JSON format) 	|
+|          Component         	|                                                                       Description                                                                      	|
 |:--------------------------:	|:------------------------------------------------------------------------------------------------------------------------------------------------------:	|
+|           Console          	| * Creation of data model * Management (create, update, destroy, etc.) of objects via command interpreter * Storage of persistent objects (JSON format) 	|
 |         Web static         	|                                                                 * HTML/CSS * Templates                                                                 	|
 |        MySQL storage       	|                                     * Replacement of local file storage with database * Using O.R.M. to map models                                     	|
 | Web framework - templating 	|                             * Deployment of web servers in Python * Dynamic HTML elements using objects stored in database                             	|
