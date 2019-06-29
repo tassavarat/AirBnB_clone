@@ -96,7 +96,6 @@ class HBNBCommand(cmd.Cmd):
         print(str_list)
 
     def do_update(self, args=None):
-        print("type of args is", type(args))
         valid_models = ["BaseModel"]
         params = args.split()
         if len(params) == 0:
@@ -112,16 +111,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             try:
                 if params[3].isdigit():
-                    print("@@@@@@@@@@@@@@@")
                     params[3] = int(params[3])
-                    print("type is", type(params[3]))
                 elif float(params[3]):
-                    print("################")
                     params[3] = float(params[3])
-                    print("type is", type(params[3]))
             except ValueError:
                 pass
-            print("type is", type(params[3]))
             for k, v in models.storage.all().items():
                 left = k.split('.')[0]
                 right = k.split('.')[1]
