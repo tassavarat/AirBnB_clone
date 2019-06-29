@@ -40,8 +40,9 @@ Example of final product:
 </p>
 
 ## Usage
-
-The console works in interactive mode:
+* All files are interpreted/compiled on Ubuntu 14.04 LTS using Python3 (version 3.4.3)
+* All code use the PEP 8 style (version 1.7.*)
+* The console works in interactive mode:
 ```
 $ ./console.py
 (hbnb) help
@@ -82,16 +83,16 @@ $
 ---
 ## Tasks
 
-### [ 0. README, AUTHORS ](./)
+### [ 0. README, AUTHORS ](./README.md)
 * Write a README.md
 
-### [ 1. Be PEP8 compliant! ](./)
+### [ 1. Be PEP8 compliant! ](./README.md)
 * Write beautiful code that passes the PEP8 checks.
 
 ### [ 2. Unittests ](./tests)
 * All your files, classes, functions must be tested with unit tests
 
-### [3. BaseModel ](./models/base_model)
+### [3. BaseModel ](./models/base_model.py)
 * Write a class BaseModel that defines all common attributes/methods for other classes:
   * Public instance attributes:
     * id: string - assign with an uuid when an instance is created:
@@ -143,7 +144,7 @@ JSON of my_model:
     created_at: (<class 'str'>) - 2017-09-28T21:05:54.119427
 ```
 
-### [ 4. Create BaseModel from dictionary ](./models/base_model)
+### [ 4. Create BaseModel from dictionary ](./models/base_model.py)
 * Update models/base_model.py:
   * __init__(self, *args, **kwargs):
     * you will use *args, **kwargs arguments for the constructor of a BaseModel. More detail
@@ -206,7 +207,7 @@ JSON of my_model:
 False
 ```
 
-### [ 5. Store first object ](./models/file_storage)
+### [ 5. Store first object ](./models/file_storage.py)
 * Write a class FileStorage that serializes instances to a JSON file and deserializes JSON file to instances:
   * models/engine/file_storage.py
   * Private class attributes:
@@ -477,11 +478,11 @@ guillaume@ubuntu:~/AirBnB$ cat file.json ; echo ""
       * user_id: string - empty string: it will be the User.id
       * text: string - empty string
 
-### [ 10. Console 1.0 ](./models/engine/file_storage)
+### [ 10. Console 1.0 ](./models/engine/file_storage.py)
 * Update FileStorage to manage correctly serialization and deserialization of all our new classes: Place, State, City, Amenity and Review
 * Update your command interpreter (console.py) to allow those actions: show, create, destroy, update and all with all classes created previously.
 
-### [ 11. All instances by class name ](./models/engine/file_storage)
+### [ 11. All instances by class name ](./models/engine/file_storage.py)
 * Update your command interpreter (console.py) to retrieve all instances of a class by using: <class name>.all()
 ```sh
 guillaume@ubuntu:~/AirBnB$ ./console.py
