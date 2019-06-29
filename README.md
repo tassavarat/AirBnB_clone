@@ -20,11 +20,7 @@ Example of final product:
 </p>
 
 ## Techstack
-* Python 3
-  * Flask
-* MySQL
-* Javascript
-* HTML
+
 <p align="center">
   <img src="https://i.imgur.com/lgZnZrz.png">
 </p>
