@@ -110,8 +110,18 @@ class HBNBCommand(cmd.Cmd):
         elif params[0] not in valid_models:
             print("** class doesn't exist **")
         else:
-            if params[3].isdigit():
-                params[3] = int(params[3])
+            try:
+                if params[3].isdigit():
+                    print("@@@@@@@@@@@@@@@")
+                    params[3] = int(params[3])
+                    print("type is", type(params[3]))
+                elif float(params[3]):
+                    print("################")
+                    params[3] = float(params[3])
+                    print("type is", type(params[3]))
+            except ValueError:
+                pass
+            print("type is", type(params[3]))
             for k, v in models.storage.all().items():
                 left = k.split('.')[0]
                 right = k.split('.')[1]
