@@ -7,9 +7,8 @@ from datetime import datetime as dt
 
 class BaseModel():
     """BaseModel class."""
-
     def __init__(self, *args, **kwargs):
-        """Initialize BaseModel."""
+        """Initialize BaseModel"""
         if kwargs:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":

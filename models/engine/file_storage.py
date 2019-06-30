@@ -8,10 +8,8 @@ from models.user import User
 
 class FileStorage:
     """FileStorage class."""
-    def __init__(self):
-        """Initialize FileStorage"""
-        self.__file_path = "file.json"
-        self.__objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """Returns the dictionary __objects"""
@@ -36,8 +34,8 @@ class FileStorage:
         """
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
-                loads = json.load(f)
-                for k, v in loads.items():
+                d = json.load(f)
+                for k, v in d.items():
                     cls = v["__class__"]
                     self.new(eval(cls)(**v))
 
