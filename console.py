@@ -9,7 +9,8 @@ import models
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand class"""
     prompt = "(hbnb) "
-    valid_models = ["BaseModel", "User"]
+    valid_models = ["BaseModel", "User", "State", "City", "Amenity", "Place",
+                    "Review"]
 
     def do_quit(self, line):
         """Quit command to exit the program
