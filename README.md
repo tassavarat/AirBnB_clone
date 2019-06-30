@@ -541,5 +541,5 @@ guillaume@ubuntu:~/AirBnB$ ./console.py
 ---
 
 ## Authors
-* __Tu Vo__
+* [__Tu Vo__](https://github.com/tuvo1106)
 * [__Tim Assavarat__](https://github.com/tassavarat)
