@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
                     str_list.append(str(v))
         print(str_list)
 
-    def do_update(self, args=None):
+    def do_update(self, args):
         """Updates an instance based on the class name and id by adding or up
         dating attribute
         """
