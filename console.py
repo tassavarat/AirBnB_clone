@@ -126,6 +126,8 @@ class HBNBCommand(cmd.Cmd):
     def default(self, inp):
         """Converts custom user input into commands"""
         parsed_inp = self.default_error_check(inp)
+        if not parsed_inp:
+            return
         cls_name, cmd, args = parsed_inp
         if cmd == "all":
             return self.do_all(cls_name)
