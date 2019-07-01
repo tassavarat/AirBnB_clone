@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""This module contains the prototype for BaseModel class"""
+
+"""
+This module contains the prototype for BaseModel class
+"""
+
 import models
 from uuid import uuid4
 from datetime import datetime as dt

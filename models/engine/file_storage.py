@@ -1,5 +1,10 @@
 #!/usr/bin/python3
-"""This module contains the prototype for BaseModel class"""
+
+"""
+This module contains the prototype for FileStorage class
+"""
+
+
 from models.base_model import BaseModel
 import json
 from os import path
