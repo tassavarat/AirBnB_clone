@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for User
+Unittest for User class
 """
 
 import unittest
