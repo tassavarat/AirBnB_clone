@@ -62,7 +62,7 @@ class Console_Test(unittest.TestCase):
         cli = self.create()
         cli.onecmd("help EOF")
         output = "Quit command to exit the program\n"
-        self.assertEqual(output, self._last_write(2))
+        self.assertEqual(output, self._last_write(1))
 
     def test_04b_help_quit(self):
         """Test to validate help quit works."""
@@ -71,13 +71,48 @@ class Console_Test(unittest.TestCase):
         output = "Quit command to exit the program\n"
         self.assertEqual(output, self._last_write(2))
 
-    def test_04b_help_all(self):
+    def test_04c_help_all(self):
         """Test to validate help all works."""
         cli = self.create()
         cli.onecmd("help all")
         output = "Prints all string representation of all instances based or"\
             + " not on the class name\n"
         self.assertEqual(output, self._last_write(2))
+
+    def test_04d_help_count(self):
+        """Test to validate help count works."""
+        cli = self.create()
+        cli.onecmd("help count")
+        output = "Retrieves the number of instances of a class\n"
+        self.assertEqual(output, self._last_write(1))
+
+    def test_04e_help_create(self):
+        """Test to validate help create works."""
+        cli = self.create()
+        cli.onecmd("help create")
+        output = "Creates a new instance, saves it, and prints id\n"
+        self.assertEqual(output, self._last_write(1))
+
+    def test_04f_help_destroy(self):
+        """Test to validate help destroy works."""
+        cli = self.create()
+        cli.onecmd("help destroy")
+        output = "Deletes an instance based on the class name and id\n"
+        self.assertEqual(output, self._last_write(1))
+
+    def test_04g_help_show(self):
+        """Test to validate help show works."""
+        cli = self.create()
+        cli.onecmd("help show")
+        o = "Prints the str repr of an instance with class name and id\n"
+        self.assertEqual(o, self._last_write(1))
+
+    def test_04h_help_update(self):
+        """Test to validate help update works."""
+        cli = self.create()
+        cli.onecmd("help update")
+        o = "Updates an instance based on the class name and id\n"
+        self.assertEqual(o, self._last_write(1))
 
     def test_05_create(self):
         """Test to validate create works."""

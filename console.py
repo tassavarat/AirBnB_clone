@@ -30,9 +30,7 @@ class HBNBCommand(cmd.Cmd):
         """Ensures that previous command is not run twice"""
 
     def do_create(self, cls):
-        """Creates a new instance of BaseModel, saves it (to the JSON file)\
-        and prints the id
-        """
+        """Creates a new instance, saves it, and prints id"""
         if not cls:
             print("** class name missing **")
             return
@@ -44,9 +42,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, args):
-        """Prints the string representation of an instance based on the class
-        name and id
-        """
+        """Prints the str repr of an instance with class name and id"""
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
@@ -98,9 +94,7 @@ the class name"""
         print(str_list)
 
     def do_update(self, args):
-        """Updates an instance based on the class name and id by adding or up
-        dating attribute
-        """
+        """Updates an instance based on the class name and id"""
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
@@ -129,7 +123,7 @@ the class name"""
                 print("** no instance found **")
 
     def do_count(self, args):
-        """Retrieves the number of instances of a class."""
+        """Retrieves the number of instances of a class"""
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
