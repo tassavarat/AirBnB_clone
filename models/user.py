@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""users module"""
+
+"""
+This module contains the user class
+"""
+
 from models.base_model import BaseModel
 
 
