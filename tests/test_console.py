@@ -78,8 +78,7 @@ class Console_Test(unittest.TestCase):
         """Test to validate help all works."""
         cli = self.create()
         cli.onecmd("help all")
-        output = "Prints all string representation of all instances based or"\
-            + " not on the class name\n"
+        output = "Prints all str repr of all instances of class name\n"
         self.assertEqual(output, self._last_write(2))
 
     def test_04d_help_count(self):

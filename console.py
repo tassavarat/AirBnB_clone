@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Entry point of the command interpreter"""
 import cmd
+from shlex import split as sp
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -32,8 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, cls):
         """Creates a new instance, saves it, and prints id"""
         if not cls:
-            print("** class name missing **")
-            return
+            return(print("** class name missing **"))
         if ' ' in cls:
             cls = cls.split(' ')[0]
         if cls not in HBNBCommand.valid_models:
@@ -79,8 +79,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_all(self, cls_name):
-        """Prints all string representation of all instances based or not on \
-the class name"""
+        """Prints all str repr of all instances of class name"""
         str_list = []
         if not cls_name:
             for v in models.storage.all().values():
@@ -97,7 +96,7 @@ the class name"""
 
     def do_update(self, args):
         """Updates an instance based on the class name and id"""
-        params = args.split()
+        params = sp(args)
         if len(params) == 0:
             print("** class name missing **")
         elif len(params) == 1:
@@ -109,10 +108,9 @@ the class name"""
         elif params[0] not in HBNBCommand.valid_models:
             print("** class doesn't exist **")
         else:
-            val = self.attribute_val(str(params))
             k = params[0] + '.' + params[1]
             if k in models.storage.all():
-                setattr(models.storage.all()[k], params[2], val)
+                setattr(models.storage.all()[k], params[2], params[3])
                 models.storage.save()
             else:
                 print("** no instance found **")
@@ -128,21 +126,17 @@ the class name"""
     def default(self, inp):
         """Converts custom user input into commands"""
         if '.' not in inp:
-            print("** invalid input **")
-            return
+            return(print("** invalid input **"))
         cls_name = inp.split('.')[0]
         if cls_name not in HBNBCommand.valid_models:
-            print("** class doesn't exist **")
-            return
+            return(print("** class doesn't exist **"))
         cmd = inp.split('.')[1]
         if '(' not in cmd and ')' not in cmd:
-            print("** invalid input **")
-            return
+            return(print("** invalid input **"))
         cmd_left = cmd.split('(')[0]
         cmd_right = cmd.split('(')[-1][:-1]
         if cmd_left not in HBNBCommand.valid_cmds:
-            print("** invalid command **")
-            return
+            return(print("** invalid command **"))
         if cmd_left == "all":
             return self.do_all(cls_name)
         if cmd_left == "count":
@@ -152,35 +146,29 @@ the class name"""
         if cmd_left == "destroy":
             return self.do_destroy(cls_name + " " + cmd_right)
         if cmd_left == "update":
-            if '{' in cmd_right and '}':
-                index = cmd_right.index(',')
-                cls_id = cmd_right[:index].replace("\"", "")
-                string_d = cmd_right[index + 1:]
-                d = eval(string_d)
-                for k, v in d.items():
-                    arg = cls_name + " " + cls_id + " " + k + " " + '"' +\
-                        str(v) + '"'
-                    self.do_update(arg)
+            if '{' in cmd_right and '}' in cmd_right:
+                self.evaluate_kwargs(cls_name, cmd_right)
             else:
-                arg = cls_name + " "
-                for i in cmd_right.split(', ')[:-1]:
-                    arg += i.replace("\"", "") + " "
-                arg += cmd_right.split(', ')[-1]
-                return self.do_update(arg)
+                self.evaluate_args(cls_name, cmd_right)
 
-    def attribute_val(self, s):
-        fi = s.index('"')
-        si = s[fi + 1:].index('"')
-        val = s[fi + 1: fi +
-                si + 1].replace("'", "").replace(',', '')
-        try:
-            if val.isdigit():
-                val = int(val)
-            elif float(val):
-                val = float(val)
-        except ValueError:
-            pass
-        return val
+    def evaluate_kwargs(self, cls_name, cmd):
+        """Converts string to correct format for update method."""
+        idx = cmd.index(',')
+        cls_id = cmd[:idx].replace("\"", "")
+        string_d = cmd[idx + 1:]
+        d = eval(string_d)
+        for k, v in d.items():
+            arg = cls_name + " " + cls_id + " " + k + " " + '"' +\
+                    str(v) + '"'
+            self.do_update(arg)
+
+    def evaluate_args(self, cls_name, cmd):
+        """Converts string to correct format for update method."""
+        arg = cls_name + " "
+        for i in cmd.split(', ')[:-1]:
+            arg += i.replace("\"", "") + " "
+        arg += cmd.split(', ')[-1]
+        self.do_update(arg)
 
 
 if __name__ == "__main__":
