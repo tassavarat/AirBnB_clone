@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""place module"""
+
+"""
+This is a module for the place class
+"""
+
 from models.base_model import BaseModel
 
 
@@ -15,4 +19,4 @@ class Place(BaseModel):
     price_by_night = 0
     latitude = 0.0
     longitude = 0.0
-    amenity_ids = ''
+    amenity_ids = []

@@ -83,7 +83,7 @@ class BaseModel_Test(unittest.TestCase):
         self.assertTrue('updated_at' in d)
         self.assertTrue('__class__' in d)
 
-    def test_06_to_dict_values(self):
+    def test_06a_to_dict_values(self):
         """Test to validate to_dict values are all strings"""
         b = BaseModel()
         b.name = "Tu"

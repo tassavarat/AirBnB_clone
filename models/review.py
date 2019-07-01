@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""review module"""
+
+"""
+This is a module for the ireview class
+"""
+
 from models.base_model import BaseModel
 
 
