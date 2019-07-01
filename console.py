@@ -172,12 +172,10 @@ class HBNBCommand(cmd.Cmd):
                 string_d = cmd_right[index + 1:]
                 d = eval(string_d)
                 for k, v in d.items():
-                    arg = ""
-                    arg += cls_name + " " + cls_id + " " + k + " " + str(v)
+                    arg = cls_name + " " + cls_id + " " + k + " " + str(v)
                     self.do_update(arg)
             else:
-                arg = ""
-                arg += cls_name + " "
+                arg = cls_name + " "
                 for i in cmd_right.split(', '):
                     arg += i.replace("\"", "") + " "
                 return self.do_update(arg)
