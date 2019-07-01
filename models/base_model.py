@@ -7,6 +7,7 @@ from datetime import datetime as dt
 
 class BaseModel():
     """BaseModel class."""
+
     def __init__(self, *args, **kwargs):
         """Initialize BaseModel"""
         if kwargs:
