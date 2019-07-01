@@ -18,13 +18,11 @@ class HBNBCommand(cmd.Cmd):
     valid_cmds = ["all", "count", "show", "destroy", "update"]
 
     def do_quit(self, line):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, line):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         print()
         return True
 
@@ -32,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
         """Ensures that previous command is not run twice"""
 
     def do_create(self, cls):
-        """Creates a new instance of BaseModel, saves it (to the JSON file)
+        """Creates a new instance of BaseModel, saves it (to the JSON file)\
         and prints the id
         """
         if not cls:
@@ -83,9 +81,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_all(self, cls_name):
-        """Prints all string representation of all instances based or not on
-        the class name
-        """
+        """Prints all string representation of all instances based or not on \
+the class name"""
         str_list = []
         if not cls_name:
             for v in models.storage.all().values():

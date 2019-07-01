@@ -5,8 +5,11 @@ Unittest for the console
 """
 
 import unittest
+import sys
+from unittest.mock import create_autospec
 from models import storage
 from models.base_model import BaseModel
+from console import HBNBCommand
 
 
 class Console_Test(unittest.TestCase):
@@ -14,7 +17,19 @@ class Console_Test(unittest.TestCase):
 
     def setUp(self):
         """Set up tests."""
-        pass
+        self.mock_stdin = create_autospec(sys.stdin)
+        self.mock_stdout = create_autospec(sys.stdin)
+
+    def create(self, server=None):
+        """Create a test environment."""
+        return HBNBCommand(stdin=self.mock_stdin, stdout=self.mock_stdout)
+
+    def _last_write(self, nr=None):
+        """:return: last `n` output lines"""
+        if nr is None:
+            return self.mock_stdout.write.call_args[0][0]
+        return "".join(map(lambda c: c[0][0],
+                       self.mock_stdout.write.call_args_list[-nr:]))
 
     def test_00_interactive_mode(self):
         """Test to validate the console works in interactive mode."""
@@ -26,7 +41,8 @@ class Console_Test(unittest.TestCase):
 
     def test_02_quit(self):
         """Test to validate quit works."""
-        pass
+        cli = self.create()
+        self.assertTrue(cli.onecmd("quit"))
 
     def test_03_EOF(self):
         """Test to validate EOF works."""
@@ -34,7 +50,34 @@ class Console_Test(unittest.TestCase):
 
     def test_04_help(self):
         """Test to validate help works."""
-        pass
+        cli = self.create()
+        cli.onecmd("help")
+        output = "\nDocumented commands (type help <topic>):\n"\
+            + "========================================\n"\
+            + "EOF  all  count  create  destroy  help  quit  show  update\n\n"
+        self.assertEqual(output, self._last_write(5))
+
+    def test_04a_help_EOF(self):
+        """Test to validate help EOF works."""
+        cli = self.create()
+        cli.onecmd("help EOF")
+        output = "Quit command to exit the program\n"
+        self.assertEqual(output, self._last_write(2))
+
+    def test_04b_help_quit(self):
+        """Test to validate help quit works."""
+        cli = self.create()
+        cli.onecmd("help quit")
+        output = "Quit command to exit the program\n"
+        self.assertEqual(output, self._last_write(2))
+
+    def test_04b_help_all(self):
+        """Test to validate help all works."""
+        cli = self.create()
+        cli.onecmd("help all")
+        output = "Prints all string representation of all instances based or"\
+            + " not on the class name\n"
+        self.assertEqual(output, self._last_write(2))
 
     def test_05_create(self):
         """Test to validate create works."""
