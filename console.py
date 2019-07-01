@@ -109,13 +109,16 @@ the class name"""
         elif params[0] not in HBNBCommand.valid_models:
             print("** class doesn't exist **")
         else:
+            ps = str(params)
+            fi = ps.index('"')
+            si = ps[fi + 1:].index('"')
+            params[3] = ps[fi + 1: fi +
+                           si + 1].replace("'", "").replace(',', '')
             try:
                 if params[3].isdigit():
                     params[3] = int(params[3])
                 elif float(params[3]):
                     params[3] = float(params[3])
-                elif '"' in params[3]:
-                    params[3] = params[3].replace('"', '')
             except ValueError:
                 pass
             k = params[0] + '.' + params[1]

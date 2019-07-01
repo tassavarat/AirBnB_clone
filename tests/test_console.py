@@ -21,6 +21,7 @@ class Console_Test(unittest.TestCase):
         """Set up tests."""
         self.mock_stdin = create_autospec(sys.stdin)
         self.mock_stdout = create_autospec(sys.stdin)
+        storage.reset()
 
     def create(self, server=None):
         """Create a test environment."""
