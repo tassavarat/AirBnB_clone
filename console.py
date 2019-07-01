@@ -67,8 +67,10 @@ class HBNBCommand(cmd.Cmd):
         """Deletes an instance based on the class name and id"""
         params = args.split()
         if len(params) == 0:
-            print("** class name missing **")
-        elif len(params) == 1:
+            return(print("** class name missing **"))
+        if params[0] not in HBNBCommand.valid_models:
+            return(print("** class doesn't exist **"))
+        if len(params) == 1:
             print("** instance id missing **")
         else:
             try:
