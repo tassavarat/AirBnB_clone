@@ -44,5 +44,5 @@ class FileStorage:
                     self.new(eval(cls)(**v))
 
     def reset(self):
-        """Reset all objects in __objects."""
+        """Reset all objects in __objects"""
         self.__objects = {}
