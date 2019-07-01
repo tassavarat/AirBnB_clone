@@ -16,7 +16,6 @@ class FileStorage_Test(unittest.TestCase):
     def setUp(self):
         """Set up tests."""
         storage.reset()
-        pass
 
     def test_00_private_attrs(self):
         """Test to validate attributes are private."""
