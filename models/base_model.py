@@ -38,12 +38,6 @@ class BaseModel():
         """Returns a dictionary containing all keys/values of
         __dict__ of the instance
         """
-        d = self.__dict__.copy()
-        d["created_at"] = dt.isoformat(d["created_at"])
-        d["updated_at"] = dt.isoformat(d["updated_at"])
-        d["__class__"] = self.__class__.__name__
-        return d
-        """
         d = {}
         for k, v in self.__dict__.items():
             if k == "created_at" or k == "updated_at":
@@ -52,4 +46,3 @@ class BaseModel():
                 d[k] = v
         d["__class__"] = self.__class__.__name__
         return d
-        """
