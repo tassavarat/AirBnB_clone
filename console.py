@@ -125,6 +125,24 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, inp):
         """Converts custom user input into commands"""
+        parsed_inp = self.default_error_check(inp)
+        cls_name, cmd, args = parsed_inp
+        if cmd == "all":
+            return self.do_all(cls_name)
+        if cmd == "count":
+            return self.do_count(cls_name)
+        if cmd == "show":
+            return self.do_show(cls_name + " " + args)
+        if cmd == "destroy":
+            return self.do_destroy(cls_name + " " + args)
+        if cmd == "update":
+            if '{' in cmd and '}' in cmd:
+                self.evaluate_kwargs(cls_name, args)
+            else:
+                self.evaluate_args(cls_name, args)
+
+    def default_error_check(self, inp):
+        """Checks for errors in input for default."""
         if '.' not in inp:
             return(print("** invalid input **"))
         cls_name = inp.split('.')[0]
@@ -137,19 +155,7 @@ class HBNBCommand(cmd.Cmd):
         cmd_right = cmd.split('(')[-1][:-1]
         if cmd_left not in HBNBCommand.valid_cmds:
             return(print("** invalid command **"))
-        if cmd_left == "all":
-            return self.do_all(cls_name)
-        if cmd_left == "count":
-            return self.do_count(cls_name)
-        if cmd_left == "show":
-            return self.do_show(cls_name + " " + cmd_right)
-        if cmd_left == "destroy":
-            return self.do_destroy(cls_name + " " + cmd_right)
-        if cmd_left == "update":
-            if '{' in cmd_right and '}' in cmd_right:
-                self.evaluate_kwargs(cls_name, cmd_right)
-            else:
-                self.evaluate_args(cls_name, cmd_right)
+        return [cls_name, cmd_left, cmd_right]
 
     def evaluate_kwargs(self, cls_name, cmd):
         """Converts string to correct format for update method."""
