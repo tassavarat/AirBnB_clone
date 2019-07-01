@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Unittest for BaseModel"""
+
+"""
+Unittest for BaseModel
+"""
+
 import unittest
 import re
 from time import sleep
@@ -9,6 +13,7 @@ from models.base_model import BaseModel
 
 class BaseModel_Test(unittest.TestCase):
     """Tests for BaseModel class"""
+
     def setUp(self):
         """Set up tests"""
         storage.reset()
