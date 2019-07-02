@@ -1,9 +1,5 @@
 #!/usr/bin/python3
-
-"""
-Unittest for BaseModel
-"""
-
+"""Unittest for BaseModel"""
 import unittest
 import re
 from time import sleep
@@ -12,33 +8,32 @@ from models.base_model import BaseModel
 
 
 class BaseModel_Test(unittest.TestCase):
-    """Tests for BaseModel class."""
-
+    """Tests for BaseModel class"""
     def setUp(self):
-        """Set up tests."""
+        """Set up tests"""
         storage.reset()
 
     def test_00_class_type(self):
-        """Test for correct class type."""
+        """Test for correct class type"""
         b = BaseModel()
         self.assertEqual(b.__class__.__name__, "BaseModel")
 
     def test_01_no_args(self):
-        """Test for no arguments passed into BaseModel."""
+        """Test for no arguments passed into BaseModel"""
         b = BaseModel()
         self.assertTrue(hasattr(b, "id"))
         self.assertTrue(hasattr(b, "created_at"))
         self.assertTrue(hasattr(b, "updated_at"))
 
     def test_02_correct_types_in_args(self):
-        """Test for correct types in args."""
+        """Test for correct types in args"""
         b = BaseModel()
         self.assertEqual(type(b.id), str)
         self.assertEqual(b.created_at.__class__.__name__, "datetime")
         self.assertEqual(b.updated_at.__class__.__name__, "datetime")
 
     def test_03_adding_extra_parameters(self):
-        """Test for manually adding parameters to empty BaseModel."""
+        """Test for manually adding parameters to empty BaseModel"""
         b = BaseModel()
         b.string = "Tu"
         b.number = 1106
@@ -62,7 +57,7 @@ class BaseModel_Test(unittest.TestCase):
         self.assertTrue(match is not None)
 
     def test_05_save(self):
-        """Test to validate that updated_at is changed when saved."""
+        """Test to validate that updated_at is changed when saved"""
         b = BaseModel()
         first_time = b.updated_at
         sleep(.5)
@@ -71,7 +66,7 @@ class BaseModel_Test(unittest.TestCase):
         self.assertNotEqual(first_time, second_time)
 
     def test_06_to_dict(self):
-        """Test to validate to_dict is outputting correctly."""
+        """Test to validate to_dict is outputting correctly"""
         b = BaseModel()
         b.name = "Tu"
         b.number = 1987
@@ -84,7 +79,7 @@ class BaseModel_Test(unittest.TestCase):
         self.assertTrue('__class__' in d)
 
     def test_06_to_dict_values(self):
-        """Test to validate to_dict values are all strings."""
+        """Test to validate to_dict values are all strings"""
         b = BaseModel()
         b.name = "Tu"
         b.number = 1987
@@ -97,10 +92,10 @@ class BaseModel_Test(unittest.TestCase):
         self.assertEqual(type(d['__class__']), str)
 
     def test_07_recreate_instance(self):
-        """Test to create instances from to_dict."""
+        """Test to create instances from to_dict"""
         b = BaseModel()
         b.name = "Tim"
-        b.number = 1992
+        b.number = 1993
         d = b.to_dict()
         new_b = BaseModel(**d)
         self.assertEqual(b.id, new_b.id)
@@ -113,23 +108,91 @@ class BaseModel_Test(unittest.TestCase):
         self.assertEqual(new_b.updated_at.__class__.__name__, "datetime")
         self.assertTrue(b is not new_b)
 
-    def test_08_empty_dict(self):
-        """Test for empty dict as an arg."""
-        d = {}
-        b = BaseModel(**d)
+    def test_07a_string_input(self):
+        """Passing a string for args"""
+        b = BaseModel("Betty")
+        self.assertEqual(b.__class__.__name__, "BaseModel")
         self.assertTrue(hasattr(b, "id"))
         self.assertTrue(hasattr(b, "created_at"))
         self.assertTrue(hasattr(b, "updated_at"))
 
+    def test_07b_undefined_input(self):
+        """Passing undefined input for args"""
+        with self.assertRaises(NameError):
+            b = BaseModel(Betsy)
+
+    def test_07c_inf_input(self):
+        """Passing infinity input for args"""
+        b = BaseModel(float("inf"))
+        self.assertEqual(b.__class__.__name__, "BaseModel")
+        self.assertTrue(hasattr(b, "id"))
+        self.assertTrue(hasattr(b, "created_at"))
+        self.assertTrue(hasattr(b, "updated_at"))
+
+    def test_07d_nan_input(self):
+        """Passing NaN input for args"""
+        b = BaseModel(float("nan"))
+        self.assertEqual(b.__class__.__name__, "BaseModel")
+        self.assertTrue(hasattr(b, "id"))
+        self.assertTrue(hasattr(b, "created_at"))
+        self.assertTrue(hasattr(b, "updated_at"))
+
+    def test_07e_string_kwargs(self):
+        """Passing string input for kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**"Betty")
+
+    def test_07f_unknown_kwargs(self):
+        """Passing unknown input for kwargs"""
+        with self.assertRaises(NameError):
+            b = BaseModel(**Betsy)
+
+    def test_07g_int_kwargs(self):
+        """Passing int input for kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**1)
+
+    def test_07h_float_kwargs(self):
+        """Passing float input for kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**1.2)
+
+    def test_07i_inf_kwargs(self):
+        """Passing float input for kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**float("inf"))
+
+    def test_07j_nan_kwargs(self):
+        """Passing float input for kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**float("nan"))
+
+    def test_08_empty_dict(self):
+        """Test for empty dict as an arg"""
+        b = BaseModel(**{})
+        self.assertTrue(hasattr(b, "id"))
+        self.assertTrue(hasattr(b, "created_at"))
+        self.assertTrue(hasattr(b, "updated_at"))
+
+    def test_08a_undefined_dict(self):
+        """Test for undefined dict as an arg"""
+        with self.assertRaises(NameError):
+            b = BaseModel(**{Betty})
+
+    def test_08b_string_dict(self):
+        """Test for string dict as an arg"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**{"Betsy"})
+
     def test_09_None(self):
-        """Test for None as an arg."""
+        """Test for None as an arg"""
         b = BaseModel(None)
         self.assertTrue(hasattr(b, "id"))
         self.assertTrue(hasattr(b, "created_at"))
         self.assertTrue(hasattr(b, "updated_at"))
 
     def test_10_manual_kwargs(self):
-        """Test for manually entering in kwargs."""
+        """Test for manually entering in kwargs"""
         b = BaseModel(id="74873652-ee4b-4eb4-8b92-6ccd09993bad",
                       created_at="2019-06-28T13:33:31.943447",
                       updated_at="2019-06-28T13:33:31.943460",

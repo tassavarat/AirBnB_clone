@@ -38,12 +38,14 @@ class HBNBCommand(cmd.Cmd):
         if not cls:
             print("** class name missing **")
             return
-        try:
+        if ' ' in cls:
+            cls = cls.split(' ')[0]
+        if cls not in HBNBCommand.valid_models:
+            print("** class doesn't exist **")
+        else:
             new_class = eval(cls)()
             print(new_class.id)
             new_class.save()
-        except NameError:
-            print("** class doesn't exist **")
 
     def do_show(self, args):
         """Prints the string representation of an instance based on the class
