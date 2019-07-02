@@ -109,22 +109,10 @@ the class name"""
         elif params[0] not in HBNBCommand.valid_models:
             print("** class doesn't exist **")
         else:
-            ps = str(params)
-            fi = ps.index('"')
-            si = ps[fi + 1:].index('"')
-            params[3] = ps[fi + 1: fi +
-                           si + 1].replace("'", "").replace(',', '')
-            try:
-                if params[3].isdigit():
-                    params[3] = int(params[3])
-                elif float(params[3]):
-                    params[3] = float(params[3])
-            except ValueError:
-                pass
+            val = self.attribute_val(str(params))
             k = params[0] + '.' + params[1]
             if k in models.storage.all():
-                setattr(models.storage.all()[k], params[2],
-                        params[3])
+                setattr(models.storage.all()[k], params[2], val)
                 models.storage.save()
             else:
                 print("** no instance found **")
@@ -170,13 +158,29 @@ the class name"""
                 string_d = cmd_right[index + 1:]
                 d = eval(string_d)
                 for k, v in d.items():
-                    arg = cls_name + " " + cls_id + " " + k + " " + str(v)
+                    arg = cls_name + " " + cls_id + " " + k + " " + '"' +\
+                        str(v) + '"'
                     self.do_update(arg)
             else:
                 arg = cls_name + " "
-                for i in cmd_right.split(', '):
+                for i in cmd_right.split(', ')[:-1]:
                     arg += i.replace("\"", "") + " "
+                arg += cmd_right.split(', ')[-1]
                 return self.do_update(arg)
+
+    def attribute_val(self, s):
+        fi = s.index('"')
+        si = s[fi + 1:].index('"')
+        val = s[fi + 1: fi +
+                si + 1].replace("'", "").replace(',', '')
+        try:
+            if val.isdigit():
+                val = int(val)
+            elif float(val):
+                val = float(val)
+        except ValueError:
+            pass
+        return val
 
 
 if __name__ == "__main__":
