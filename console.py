@@ -18,13 +18,11 @@ class HBNBCommand(cmd.Cmd):
     valid_cmds = ["all", "count", "show", "destroy", "update"]
 
     def do_quit(self, line):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, line):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         print()
         return True
 
@@ -32,9 +30,7 @@ class HBNBCommand(cmd.Cmd):
         """Ensures that previous command is not run twice"""
 
     def do_create(self, cls):
-        """Creates a new instance of BaseModel, saves it (to the JSON file)
-        and prints the id
-        """
+        """Creates a new instance, saves it, and prints id"""
         if not cls:
             print("** class name missing **")
             return
@@ -48,9 +44,7 @@ class HBNBCommand(cmd.Cmd):
             new_class.save()
 
     def do_show(self, args):
-        """Prints the string representation of an instance based on the class
-        name and id
-        """
+        """Prints the str repr of an instance with class name and id"""
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
@@ -85,9 +79,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_all(self, cls_name):
-        """Prints all string representation of all instances based or not on
-        the class name
-        """
+        """Prints all string representation of all instances based or not on \
+the class name"""
         str_list = []
         if not cls_name:
             for v in models.storage.all().values():
@@ -103,9 +96,7 @@ class HBNBCommand(cmd.Cmd):
         print(str_list)
 
     def do_update(self, args):
-        """Updates an instance based on the class name and id by adding or up
-        dating attribute
-        """
+        """Updates an instance based on the class name and id"""
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
@@ -134,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_count(self, args):
-        """Retrieves the number of instances of a class."""
+        """Retrieves the number of instances of a class"""
         params = args.split()
         if len(params) == 0:
             print("** class name missing **")
