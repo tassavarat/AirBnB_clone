@@ -76,7 +76,13 @@ class FileStorage_Test(unittest.TestCase):
     def test_03a_working_reload(self):
         """Checks reload functionality if file_path doesn't exist"""
         fs = FileStorage()
-        self.assertEqual(fs.reload(), None)
+        b = BaseModel()
+        key = "BaseModel" + '.' + b.id
+        fs.new(b)
+        fs.save()
+        fs.reset()
+        fs.reload()
+        self.assertTrue(fs.all()[key])
 
     def test_03b_working_reload(self):
         """Checks reload functionality for improper date time"""
