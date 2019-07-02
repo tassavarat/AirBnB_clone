@@ -56,6 +56,36 @@ class FileStorage_Test(unittest.TestCase):
         storage.new(b)
         self.assertTrue(storage.all()[key].__class__.__name__, "BaseModel")
 
+    def test_05_new_int(self):
+        """Passes int to new"""
+        with self.assertRaises(AttributeError):
+            storage.new(1)
+
+    def test_06_new_float(self):
+        """Passes foat to new"""
+        with self.assertRaises(AttributeError):
+            storage.new(1.1)
+
+    def test_07_new_unknown(self):
+        """Passes unknown to new"""
+        with self.assertRaises(NameError):
+            storage.new(b)
+
+    def test_08_new_inf(self):
+        """Passes inf to new"""
+        with self.assertRaises(AttributeError):
+            storage.new(float("inf"))
+
+    def test_09_new_inf(self):
+        """Passes nan to new"""
+        with self.assertRaises(AttributeError):
+            storage.new(float("nan"))
+
+    def test_09_new_string(self):
+        """Passes string to new"""
+        with self.assertRaises(AttributeError):
+            storage.new("string")
+
 
 if __name__ == '__main__':
     unittest.main()
