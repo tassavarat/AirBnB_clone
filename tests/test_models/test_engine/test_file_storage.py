@@ -16,7 +16,14 @@ class FileStorage_Test(unittest.TestCase):
 
     def setUp(self):
         """Set up tests."""
-        storage.reset()
+        pass
+
+    def tearDown(self):
+        """Tear down tests"""
+        try:
+            os.remove("file.json")
+        except Exception:
+            pass
 
     def test_00_private_attrs(self):
         """Test to validate attributes are private."""
@@ -36,6 +43,14 @@ class FileStorage_Test(unittest.TestCase):
         """Test to validate all() returns an object."""
         fs = FileStorage()
         self.assertEqual(type(fs.all()), dict)
+
+    def test_01a_all_return_type(self):
+        """Test to validate all() returns an empty dict"""
+        fs = FileStorage()
+        fs.reset()
+        self.assertFalse(fs.all())
+        fs.new(BaseModel())
+        self.assertTrue(fs.all())
 
     def test_02_working_save(self):
         """Test to validate save works."""
@@ -60,7 +75,6 @@ class FileStorage_Test(unittest.TestCase):
 
     def test_03a_working_reload(self):
         """Checks reload functionality if file_path doesn't exist"""
-        os.remove("file.json")
         fs = FileStorage()
         self.assertEqual(fs.reload(), None)
 
@@ -80,7 +94,7 @@ class FileStorage_Test(unittest.TestCase):
         """Passes int to new"""
         fs = FileStorage()
         with self.assertRaises(AttributeError):
-            storage.new(1)
+            fs.new(1)
 
     def test_06_new_float(self):
         """Passes foat to new"""
