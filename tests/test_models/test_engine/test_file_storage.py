@@ -54,11 +54,11 @@ class FileStorage_Test(unittest.TestCase):
 
     def test_02_working_save(self):
         """Test to validate save works."""
-        b = BaseModel()
-        key = "BaseModel" + "." + b.id
-        b.save()
-        self.assertEqual(storage.all()[key].__class__.__name__, "BaseModel")
-        self.assertEqual(storage.all()[key].to_dict(), b.to_dict())
+        fs = FileStorage()
+        fs.reset()
+        fs.new(BaseModel())
+        fs.save()
+        self.assertTrue(os.path.isfile("file.json"))
 
     def test_03_working_reload(self):
         """Test to validate reload works."""
