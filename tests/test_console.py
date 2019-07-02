@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for the console
+Unittest for the console class
 """
 
 import unittest
@@ -156,9 +156,60 @@ class Console_Test(unittest.TestCase):
         self.assertNotEqual(None, prog.match(output.getvalue()))
         sys.stdout = sys.__stdout__
 
-    def test_06_show(self):
+    def test_06a_show(self):
         """Test to validate show works."""
-        pass
+        cli = self.create()
+        b = BaseModel()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("show BaseModel " + b.id)
+        self.assertTrue(output.getvalue().startswith('[BaseModel]'))
+        sys.stdout = sys.__stdout__
+
+    def test_06b_show_missing_class(self):
+        """Test for show with missing class."""
+        cli = self.create()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("show ")
+        self.assertEqual("** class name missing **\n", output.getvalue())
+        sys.stdout = sys.__stdout__
+
+    def test_06b_show_missing_class(self):
+        """Test for show with missing class."""
+        cli = self.create()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("show ")
+        self.assertEqual("** class name missing **\n", output.getvalue())
+        sys.stdout = sys.__stdout__
+
+    def test_06c_show_missing_id(self):
+        """Test for show with missing id."""
+        cli = self.create()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("show MyModel")
+        self.assertEqual("** class doesn't exist **\n", output.getvalue())
+        sys.stdout = sys.__stdout__
+
+    def test_06d_show_missing_class(self):
+        """Test for show with missing class."""
+        cli = self.create()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("show BaseModel")
+        self.assertEqual("** instance id missing **\n", output.getvalue())
+        sys.stdout = sys.__stdout__
+
+    def test_06e_show_missing_class(self):
+        """Test for show with missing class."""
+        cli = self.create()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("show BaseModel 32432423")
+        self.assertEqual("** no instance found **\n", output.getvalue())
+        sys.stdout = sys.__stdout__
 
     def test_07_destroy(self):
         """Test to validate destroy works."""
