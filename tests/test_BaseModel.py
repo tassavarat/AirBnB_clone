@@ -18,6 +18,11 @@ class BaseModel_Test(unittest.TestCase):
         b = BaseModel()
         self.assertEqual(b.__class__.__name__, "BaseModel")
 
+    def test_00a_class_invalid(self):
+        """Test for invalid class type"""
+        with self.assertRaises(NameError):
+            b = FunModel()
+
     def test_01_no_args(self):
         """Test for no arguments passed into BaseModel"""
         b = BaseModel()
@@ -282,7 +287,7 @@ class BaseModel_Test(unittest.TestCase):
             self.assertTrue(hasattr(b, "updated_at"))
             self.assertTrue(hasattr(b, "name"))
 
-    def test_10e_manual_kwargs_nan(self):
+    def test_10e_manual_kwargs_unknown(self):
         """Test for manually entering unknown in kwargs"""
         with self.assertRaises(NameError):
             b = BaseModel(id=f,
