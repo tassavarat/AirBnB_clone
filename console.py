@@ -143,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
         if cmd == "destroy":
             return self.do_destroy(cls_name + " " + args)
         if cmd == "update":
-            if '{' in cmd and '}' in cmd:
+            if '{' in args and '}' in args:
                 self.evaluate_kwargs(cls_name, args)
             else:
                 self.evaluate_args(cls_name, args)
