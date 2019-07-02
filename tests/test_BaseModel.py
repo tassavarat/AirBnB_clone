@@ -184,6 +184,26 @@ class BaseModel_Test(unittest.TestCase):
         with self.assertRaises(TypeError):
             b = BaseModel(**{"Betsy"})
 
+    def test_08c_int_dict(self):
+        """Test for int dict as an arg"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**{1})
+
+    def test_08d_float_dict(self):
+        """Test for float dict as an arg"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**{1.2})
+
+    def test_08e_inf_dict(self):
+        """Test for inf dict as an arg"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**{float("inf")})
+
+    def test_08e_nan_dict(self):
+        """Test for nan dict as an arg"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(**{float("nan")})
+
     def test_09_None(self):
         """Test for None as an arg"""
         b = BaseModel(None)
@@ -201,6 +221,78 @@ class BaseModel_Test(unittest.TestCase):
         self.assertTrue(hasattr(b, "created_at"))
         self.assertTrue(hasattr(b, "updated_at"))
         self.assertTrue(hasattr(b, "name"))
+
+    def test_10a_manual_kwargs_none(self):
+        """Test for manually entering None in kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(id=None,
+                          created_at=None,
+                          updated_at=None,
+                          name=None)
+            self.assertTrue(hasattr(b, "id"))
+            self.assertTrue(hasattr(b, "created_at"))
+            self.assertTrue(hasattr(b, "updated_at"))
+            self.assertTrue(hasattr(b, "name"))
+
+    def test_10b_manual_kwargs_int(self):
+        """Test for manually entering int in kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(id=1,
+                          created_at=1,
+                          updated_at=1,
+                          name=1)
+            self.assertTrue(hasattr(b, "id"))
+            self.assertTrue(hasattr(b, "created_at"))
+            self.assertTrue(hasattr(b, "updated_at"))
+            self.assertTrue(hasattr(b, "name"))
+
+    def test_10c_manual_kwargs_float(self):
+        """Test for manually entering float in kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(id=1.1,
+                          created_at=1.1,
+                          updated_at=1.1,
+                          name=1.1)
+            self.assertTrue(hasattr(b, "id"))
+            self.assertTrue(hasattr(b, "created_at"))
+            self.assertTrue(hasattr(b, "updated_at"))
+            self.assertTrue(hasattr(b, "name"))
+
+    def test_10d_manual_kwargs_inf(self):
+        """Test for manually entering inf in kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(id=float("inf"),
+                          created_at=float("inf"),
+                          updated_at=float("inf"),
+                          name=float("inf"))
+            self.assertTrue(hasattr(b, "id"))
+            self.assertTrue(hasattr(b, "created_at"))
+            self.assertTrue(hasattr(b, "updated_at"))
+            self.assertTrue(hasattr(b, "name"))
+
+    def test_10e_manual_kwargs_nan(self):
+        """Test for manually entering nan in kwargs"""
+        with self.assertRaises(TypeError):
+            b = BaseModel(id=float("nan"),
+                          created_at=float("nan"),
+                          updated_at=float("nan"),
+                          name=float("nan"))
+            self.assertTrue(hasattr(b, "id"))
+            self.assertTrue(hasattr(b, "created_at"))
+            self.assertTrue(hasattr(b, "updated_at"))
+            self.assertTrue(hasattr(b, "name"))
+
+    def test_10e_manual_kwargs_nan(self):
+        """Test for manually entering unknown in kwargs"""
+        with self.assertRaises(NameError):
+            b = BaseModel(id=f,
+                          created_at=f,
+                          updated_at=f,
+                          name=f)
+            self.assertTrue(hasattr(b, "id"))
+            self.assertTrue(hasattr(b, "created_at"))
+            self.assertTrue(hasattr(b, "updated_at"))
+            self.assertTrue(hasattr(b, "name"))
 
 
 if __name__ == '__main__':
