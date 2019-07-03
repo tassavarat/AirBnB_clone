@@ -338,6 +338,24 @@ class Console_Test(unittest.TestCase):
                                  p_id + ' "first_name", "John")')
             self.assertTrue(hasattr(p, 'first_name'))
 
+    def test_09_update_dict(self):
+        """Validating dictionary update."""
+        b = BaseModel()
+        b_id = b.id
+        s = State()
+        s_id = s.id
+        u = User()
+        u_id = u.id
+        a = Amenity()
+        a_id = a.id
+        r = Review()
+        r_id = r.id
+        c = City()
+        c_id = c.id
+        p = Place()
+        p_id = p.id
+
+
 
 if __name__ == '__main__':
     unittest.main()
