@@ -18,6 +18,8 @@ from models.place import Place
 from models.review import Review
 from console import HBNBCommand
 from io import StringIO
+import json
+from models.engine.file_storage import FileStorage
 
 
 class Console_Test(unittest.TestCase):
@@ -131,6 +133,14 @@ class Console_Test(unittest.TestCase):
         p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
         prog = re.compile(p)
         self.assertNotEqual(None, prog.match(output.getvalue()))
+        with open("file.json") as f:
+            d = json.load(f)
+            for k, v in d.items():
+                class_name = v["__class__"]
+                id = v["id"]
+        my_model = (eval(v["__class__"])(**v))
+        self.assertEqual(class_name, my_model.__class__.__name__)
+        self.assertEqual(id, my_model.id)
 
     def test_05a_create_bad_value(self):
         """Test to validate create with bad value."""
