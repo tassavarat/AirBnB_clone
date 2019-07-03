@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         """Prints the str repr of an instance with class name and id"""
-        params = args.split()
+        params = sp(args)
         if len(params) == 0:
             return(print("** class name missing **"))
         if params[0] not in HBNBCommand.valid_models:
@@ -65,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id"""
-        params = args.split()
+        params = sp(args)
         if len(params) == 0:
             return(print("** class name missing **"))
         if params[0] not in HBNBCommand.valid_models:
