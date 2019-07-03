@@ -7,7 +7,7 @@ Unittest for the console class
 import unittest
 import sys
 import re
-from unittest.mock import create_autospec
+from unittest.mock import create_autospec, patch
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -126,26 +126,23 @@ class Console_Test(unittest.TestCase):
 
     def test_05_create(self):
         """Test to validate create works."""
-        output = StringIO()
-        sys.stdout = output
-        HBNBCommand().onecmd("create BaseModel")
-        self.assertEqual(str, type(output.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create BaseModel")
+            self.assertEqual(str, type(o.getvalue()))
 
     def test_05a_create_bad_value(self):
         """Test to validate create with bad value."""
-        output = StringIO()
-        sys.stdout = output
-        HBNBCommand().onecmd("create Monster")
-        o = "** class doesn't exist **\n"
-        self.assertEqual(o, output.getvalue())
+        error = "** class doesn't exist **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Monster")
+            self.assertEqual(error, o.getvalue())
 
     def test_05b_create_empty_value(self):
         """Test to validate create with empty values."""
-        output = StringIO()
-        sys.stdout = output
-        HBNBCommand().onecmd("create")
-        o = "** class name missing **\n"
-        self.assertEqual(o, output.getvalue())
+        error = "** class name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create")
+            self.assertEqual(error, o.getvalue())
 
     def test_05c_create_extra_values(self):
         """Test to validate create with extra empty."""
