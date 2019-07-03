@@ -319,13 +319,16 @@ class Console_Test(unittest.TestCase):
     def test_09_count(self):
         """Test if count works"""
         b = BaseModel()
-        b2 = BaseModel()
         s = State()
         u = User()
         a = Amenity()
         r = Review()
         c = City()
         p = Place()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count BaseModel")
+            self.assertEqual('1\n', o.getvalue())
+        b2 = BaseModel()
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("count BaseModel")
             self.assertEqual('2\n', o.getvalue())
