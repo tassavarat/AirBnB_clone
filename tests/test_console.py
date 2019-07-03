@@ -129,6 +129,24 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("create BaseModel")
             self.assertEqual(str, type(o.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create User")
+            self.assertEqual(str, type(o.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Place")
+            self.assertEqual(str, type(o.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Review")
+            self.assertEqual(str, type(o.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create City")
+            self.assertEqual(str, type(o.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Amenity")
+            self.assertEqual(str, type(o.getvalue()))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create User")
+            self.assertEqual(str, type(o.getvalue()))
 
     def test_05a_create_bad_value(self):
         """Test to validate create with bad value."""
