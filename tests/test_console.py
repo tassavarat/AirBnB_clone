@@ -389,7 +389,48 @@ class Console_Test(unittest.TestCase):
 
     def test_10_update(self):
         """Test to validate update works."""
-        pass
+        b = BaseModel()
+        b_id = b.id
+        s = State()
+        s_id = s.id
+        u = User()
+        u_id = u.id
+        a = Amenity()
+        a_id = a.id
+        r = Review()
+        r_id = r.id
+        c = City()
+        c_id = c.id
+        p = Place()
+        p_id = p.id
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('BaseModel.update(' +
+                                 b_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(b, 'first_name'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('State.update(' +
+                                 s_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(s, 'first_name'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('User.update(' +
+                                 u_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(u, 'first_name'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('Amenity.update(' +
+                                 a_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(a, 'first_name'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('Review.update(' +
+                                 r_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(r, 'first_name'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('City.update(' +
+                                 c_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(c, 'first_name'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('Place.update(' +
+                                 p_id + ' "first_name", "John")')
+            self.assertTrue(hasattr(p, 'first_name'))
 
 
 if __name__ == '__main__':
