@@ -124,32 +124,26 @@ class Console_Test(unittest.TestCase):
 
     def test_05_create(self):
         """Test to validate create works."""
-        cli = self.create()
         output = StringIO()
         sys.stdout = output
-        cli.onecmd("create BaseModel")
-        p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
-        prog = re.compile(p)
-        self.assertNotEqual(None, prog.match(output.getvalue()))
-        sys.stdout = sys.__stdout__
+        HBNBCommand().onecmd("create BaseModel")
+        self.assertEqual(str, type(output.getvalue()))
 
     def test_05a_create_bad_value(self):
         """Test to validate create with bad value."""
-        cli = self.create()
         output = StringIO()
         sys.stdout = output
-        cli.onecmd("create Monster")
-        self.assertEqual("** class doesn't exist **\n", output.getvalue())
-        sys.stdout = sys.__stdout__
+        HBNBCommand().onecmd("create Monster")
+        o = "** class doesn't exist **\n"
+        self.assertEqual(o, output.getvalue())
 
     def test_05b_create_empty_value(self):
         """Test to validate create with empty values."""
-        cli = self.create()
         output = StringIO()
         sys.stdout = output
-        cli.onecmd("create")
-        self.assertEqual("** class name missing **\n", output.getvalue())
-        sys.stdout = sys.__stdout__
+        HBNBCommand().onecmd("create")
+        o = "** class name missing **\n"
+        self.assertEqual(o, output.getvalue())
 
     def test_05c_create_extra_values(self):
         """Test to validate create with extra empty."""
