@@ -354,7 +354,10 @@ class Console_Test(unittest.TestCase):
         c_id = c.id
         p = Place()
         p_id = p.id
-
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('BaseModel.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
 
 
 if __name__ == '__main__':
