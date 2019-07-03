@@ -231,21 +231,45 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("State.count()")
             self.assertEqual('1\n', o.getvalue())
+        s1 = State()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("State.count()")
+            self.assertEqual('2\n', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("User.count()")
             self.assertEqual('1\n', o.getvalue())
+        u1 = User()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("User.count()")
+            self.assertEqual('2\n', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("Amenity.count()")
             self.assertEqual('1\n', o.getvalue())
+        a1 = Amenity()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Amenity.count()")
+            self.assertEqual('2\n', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("Review.count()")
             self.assertEqual('1\n', o.getvalue())
+        r1 = Review()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Review.count()")
+            self.assertEqual('2\n', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("City.count()")
             self.assertEqual('1\n', o.getvalue())
+        c1 = City()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("City.count()")
+            self.assertEqual('2\n', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("Place.count()")
             self.assertEqual('1\n', o.getvalue())
+        p1 = Place()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Place.count()")
+            self.assertEqual('2\n', o.getvalue())
 
     def test_09_update_errors(self):
         """Test to validate update errors."""
