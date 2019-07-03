@@ -313,14 +313,21 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd('BaseModel.update("' +
                                  b_id + '", "first_name", "John")')
             self.assertTrue(hasattr(b, 'first_name'))
+            HBNBCommand().onecmd("BaseModel.show(" + b_id + ")")
+            self.assertIn('John', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('BaseModel.update("' +
                                  b_id + '", "age", 89)')
             self.assertTrue(hasattr(b, 'age'))
+            HBNBCommand().onecmd("BaseModel.show(" + b_id + ")")
+            self.assertIn('89', o.getvalue())
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('BaseModel.update("' +
                                  b_id + '", "weight", 58.9)')
             self.assertTrue(hasattr(b, 'weight'))
+            HBNBCommand().onecmd("BaseModel.show(" + b_id + ")")
+            self.assertIn('58.9', o.getvalue())
+
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('State.update("' +
                                  s_id + '", "first_name", "John")')
