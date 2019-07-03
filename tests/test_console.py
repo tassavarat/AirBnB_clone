@@ -323,12 +323,34 @@ class Console_Test(unittest.TestCase):
 
     def test_08_all(self):
         """Test to validate all works."""
-        cli = self.create()
         b = BaseModel()
-        output = StringIO()
-        sys.stdout = output
-        cli.onecmd("all")
-        # self.assertEqual("** no instance found **\n", output.getvalue())
+        s = State()
+        u = User()
+        a = Amenity()
+        r = Review()
+        c = City()
+        p = Place()
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.all()")
+            self.assertIn('BaseModel', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("State.all()")
+            self.assertIn('State', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("User.all()")
+            self.assertIn('User', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Amenity.all()")
+            self.assertIn('Amenity', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Review.all()")
+            self.assertIn('Review', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("City.all()")
+            self.assertIn('City', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Place.all()")
+            self.assertIn('Place', o.getvalue())
 
     def test_09_count(self):
         """Test if count works"""
