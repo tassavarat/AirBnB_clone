@@ -114,6 +114,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             k = params[0] + '.' + params[1]
+            val = params[3]
+            try:
+                if val.isdigit():
+                    val = int(val)
+                elif float(val):
+                    val = float(val)
+            except ValueError:
+                pass
             if k in models.storage.all():
                 setattr(models.storage.all()[k], params[2], params[3])
                 models.storage.save()
@@ -155,7 +163,8 @@ class HBNBCommand(cmd.Cmd):
         cls_name = inp.split('.')[0]
         if cls_name not in HBNBCommand.valid_models:
             return(print("** class doesn't exist **"))
-        cmd = inp.split('.')[1]
+        idx = inp.index('.')
+        cmd = inp[idx + 1:]
         if '(' not in cmd and ')' not in cmd:
             return(print("** invalid input **"))
         cmd_left = cmd.split('(')[0]
