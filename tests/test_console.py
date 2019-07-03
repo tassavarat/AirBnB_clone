@@ -316,7 +316,16 @@ class Console_Test(unittest.TestCase):
         cli.onecmd("all")
         # self.assertEqual("** no instance found **\n", output.getvalue())
 
-    def test_09_update(self):
+    def test_09_count(self):
+        """Test if count works"""
+        cli = self.create()
+        b = BaseModel()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("count BaseModel")
+        self.assertEqual("1\n", output.getvalue())
+
+    def test_10_update(self):
         """Test to validate update works."""
         pass
 
