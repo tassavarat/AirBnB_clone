@@ -358,6 +358,37 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd('BaseModel.update(' + b_id +
                                  ', {\'first_name\': "John", "age": 89})')
             self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('State.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('User.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('Amenity.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('Review.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('City.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('Place.update(' + b_id +
+                                 ', {\'first_name\': "John", "age": 89})')
+            self.assertTrue(hasattr(b, 'first_name'))
+            self.assertTrue(hasattr(b, 'age'))
 
 
 if __name__ == '__main__':
