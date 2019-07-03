@@ -10,6 +10,12 @@ import re
 from unittest.mock import create_autospec
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from console import HBNBCommand
 from io import StringIO
 
@@ -137,7 +143,7 @@ class Console_Test(unittest.TestCase):
         sys.stdout = sys.__stdout__
 
     def test_05b_create_empty_value(self):
-        """Test to validate create with bad empty."""
+        """Test to validate create with empty values."""
         cli = self.create()
         output = StringIO()
         sys.stdout = output
@@ -164,15 +170,6 @@ class Console_Test(unittest.TestCase):
         sys.stdout = output
         cli.onecmd("show BaseModel " + b.id)
         self.assertTrue(output.getvalue().startswith('[BaseModel]'))
-        sys.stdout = sys.__stdout__
-
-    def test_06b_show_missing_class(self):
-        """Test for show with missing class."""
-        cli = self.create()
-        output = StringIO()
-        sys.stdout = output
-        cli.onecmd("show ")
-        self.assertEqual("** class name missing **\n", output.getvalue())
         sys.stdout = sys.__stdout__
 
     def test_06b_show_missing_class(self):
@@ -213,7 +210,109 @@ class Console_Test(unittest.TestCase):
 
     def test_07_destroy(self):
         """Test to validate destroy works."""
-        pass
+        cli = self.create()
+        b = BaseModel()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy BaseModel " + b.id)
+        cli.onecmd("show BaseModel " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07a_destroy(self):
+        """Check destroy with invalid instance."""
+        cli = self.create()
+        b = BaseModel()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy BaseModel " + b.id)
+        cli.onecmd("destroy BaseModel " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07b_destroy(self):
+        """Check destroy with invalid class."""
+        cli = self.create()
+        b = BaseModel()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy MyModel " + b.id)
+        self.assertEqual("** class doesn't exist **\n", output.getvalue())
+
+    def test_07c_destroy(self):
+        """Check destroy without class name."""
+        cli = self.create()
+        b = BaseModel()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy")
+        self.assertEqual("** class name missing **\n", output.getvalue())
+
+    def test_07d_destroy(self):
+        """Check destroy without id."""
+        cli = self.create()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy BaseModel")
+        self.assertEqual("** instance id missing **\n", output.getvalue())
+
+    def test_07e_destroy(self):
+        """Test to validate destroy works on different models."""
+        cli = self.create()
+        b = User()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy User " + b.id)
+        cli.onecmd("show User " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07f_destroy(self):
+        """Test to validate destroy works on different models."""
+        cli = self.create()
+        b = State()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy State " + b.id)
+        cli.onecmd("show State " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07g_destroy(self):
+        """Test to validate destroy works on different models."""
+        cli = self.create()
+        b = City()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy City " + b.id)
+        cli.onecmd("show City " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07h_destroy(self):
+        """Test to validate destroy works on different models."""
+        cli = self.create()
+        b = Amenity()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy Amenity " + b.id)
+        cli.onecmd("show Amenity " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07i_destroy(self):
+        """Test to validate destroy works on different models."""
+        cli = self.create()
+        b = Place()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy Place " + b.id)
+        cli.onecmd("show Place " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
+
+    def test_07j_destroy(self):
+        """Test to validate destroy works on different models."""
+        cli = self.create()
+        b = Review()
+        output = StringIO()
+        sys.stdout = output
+        cli.onecmd("destroy Review " + b.id)
+        cli.onecmd("show Review " + b.id)
+        self.assertEqual("** no instance found **\n", output.getvalue())
 
     def test_08_all(self):
         """Test to validate all works."""

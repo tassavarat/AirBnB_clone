@@ -84,12 +84,6 @@ class FileStorage_Test(unittest.TestCase):
         fs.reload()
         self.assertTrue(fs.all()[key])
 
-    def test_03b_working_reload(self):
-        """Checks reload functionality for improper date time"""
-
-    def test_03c_working_reload(self):
-        """Checks reload functionality for improper json file"""
-
     def test_04_working_new(self):
         """Test to validate if new works."""
         fs = FileStorage()
@@ -120,7 +114,7 @@ class FileStorage_Test(unittest.TestCase):
         with self.assertRaises(AttributeError):
             fs.new(float("inf"))
 
-    def test_09_new_inf(self):
+    def test_09_new_nan(self):
         """Passes nan to new"""
         fs = FileStorage()
         with self.assertRaises(AttributeError):
