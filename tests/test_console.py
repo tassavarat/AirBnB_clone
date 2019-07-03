@@ -320,10 +320,38 @@ class Console_Test(unittest.TestCase):
         """Test if count works"""
         cli = self.create()
         b = BaseModel()
+        b1 = BaseModel()
+        s = State()
+        u = User()
+        a = Amenity()
+        r = Review()
+        c = City()
+        p = Place()
         output = StringIO()
         sys.stdout = output
         cli.onecmd("count BaseModel")
         self.assertEqual("1\n", output.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count BaseModel")
+            self.assertEqual('2\n', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count State")
+            self.assertEqual('1\n', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count User")
+            self.assertEqual('1\n', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count Amenity")
+            self.assertEqual('1\n', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count Review")
+            self.assertEqual('1\n', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count City")
+            self.assertEqual('1\n', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("count Place")
+            self.assertEqual('1\n', o.getvalue())
 
     def test_10_update(self):
         """Test to validate update works."""
