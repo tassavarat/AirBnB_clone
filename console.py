@@ -107,6 +107,9 @@ class HBNBCommand(cmd.Cmd):
         elif len(params) == 1:
             print("** instance id missing **")
         elif len(params) == 2:
+            k = params[0] + "." + params[1]
+            if k not in models.storage.all():
+                return(print("** no instance found **"))
             print("** attribute name missing **")
         elif len(params) == 3:
             print("** value missing **")
@@ -124,9 +127,8 @@ class HBNBCommand(cmd.Cmd):
                 pass
             if k in models.storage.all():
                 setattr(models.storage.all()[k], params[2], params[3])
-                models.storage.save()
             else:
-                print("** no instance found **")
+                return(print("** no instance found **"))
 
     def do_count(self, args):
         """Retrieves the number of instances of a class"""
