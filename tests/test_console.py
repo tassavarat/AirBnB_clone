@@ -314,57 +314,29 @@ class Console_Test(unittest.TestCase):
                                  b_id + '", "first_name", "John")')
             self.assertTrue(hasattr(b, 'first_name'))
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('BaseModel.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
-        with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('State.update("' +
                                  s_id + '", "first_name", "John")')
             self.assertTrue(hasattr(s, 'first_name'))
-        with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('State.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('User.update("' +
                                  u_id + '", "first_name", "John")')
             self.assertTrue(hasattr(u, 'first_name'))
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('User.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
-        with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('Amenity.update("' +
                                  a_id + '", "first_name", "John")')
             self.assertTrue(hasattr(a, 'first_name'))
-        with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('Amenity.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('Review.update("' +
                                  r_id + '", "first_name", "John")')
             self.assertTrue(hasattr(r, 'first_name'))
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('Review.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
-        with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('City.update("' +
                                  c_id + '", "first_name", "John")')
             self.assertTrue(hasattr(c, 'first_name'))
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('City.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
-        with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('Place.update("' +
                                  p_id + '", "first_name", "John")')
             self.assertTrue(hasattr(p, 'first_name'))
-        with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('Place.update("' +
-                                 b_id + '", "age", 89)')
-            self.assertTrue(hasattr(b, 'age'))
 
     def test_09_update_dict(self):
         """Validating dictionary update."""
