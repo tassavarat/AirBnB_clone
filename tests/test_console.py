@@ -26,12 +26,12 @@ class Console_Test(unittest.TestCase):
         """Set up tests."""
         storage.reset()
 
-    def test_02_quit(self):
+    def test_01_quit(self):
         """Test to validate quit works."""
         with patch("sys.stdout", new=StringIO()) as o:
             self.assertTrue(HBNBCommand().onecmd("quit"))
 
-    def test_04_help(self):
+    def test_02_help(self):
         """Test to validate help works."""
         output = "\nDocumented commands (type help <topic>):\n"\
             + "========================================\n"\
@@ -39,8 +39,141 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help")
             self.assertEqual(output, o.getvalue())
+        output = "Quit command to exit the program\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help EOF")
+            self.assertEqual(output, o.getvalue())
+        output = "Retrieves the number of instances of a class\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help count")
+            self.assertEqual(output, o.getvalue())
+        output = "Creates a new instance, saves it, and prints id\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help create")
+            self.assertEqual(output, o.getvalue())
+        output = "Deletes an instance based on the class name and id\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help destroy")
+            self.assertEqual(output, o.getvalue())
+        output = "Quit command to exit the program\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help quit")
+            self.assertEqual(output, o.getvalue())
+        output = "Prints the str repr of an instance with class name and id\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help show")
+            self.assertEqual(output, o.getvalue())
+        output = "Updates an instance based on the class name and id\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help update")
+            self.assertEqual(output, o.getvalue())
 
-    def test_08_all(self):
+    def test_03_destroy_errors(self):
+        """Test to validate destroy errors."""
+        output = "** class doesn't exist **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("MyModel.destroy()")
+            self.assertEqual(output, o.getvalue())
+        output = "** instance id missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.destroy()")
+            self.assertEqual(output, o.getvalue())
+        output = "** no instance found **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('BaseModel.destroy("holberton")')
+            self.assertEqual(output, o.getvalue())
+
+    def test_04_destroy(self):
+        """Test to validate destroy works."""
+        b = BaseModel()
+        b_id = b.id
+        s = State()
+        s_id = s.id
+        u = User()
+        u_id = u.id
+        a = Amenity()
+        a_id = a.id
+        r = Review()
+        r_id = r.id
+        c = City()
+        c_id = c.id
+        p = Place()
+        p_id = p.id
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.destroy(" + b_id + ")")
+            self.assertNotIn('BaseModel', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("State.destroy(" + s_id + ")")
+            self.assertNotIn('State', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("User.destroy(" + u_id + ")")
+            self.assertNotIn('User', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Amenity.destroy(" + a_id + ")")
+            self.assertNotIn('Amenity', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Review.destroy(" + r_id + ")")
+            self.assertNotIn('Review', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("City.destroy(" + c_id + ")")
+            self.assertNotIn('City', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Place.destroy(" + p_id + ")")
+
+    def test_05_show_errors(self):
+        """Test to validate destroy errors."""
+        output = "** class doesn't exist **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("MyModel.show()")
+            self.assertEqual(output, o.getvalue())
+        output = "** instance id missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.show()")
+            self.assertEqual(output, o.getvalue())
+        output = "** no instance found **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('BaseModel.show("holberton")')
+            self.assertEqual(output, o.getvalue())
+
+    def test_06_show(self):
+        """Test to validate show works."""
+        b = BaseModel()
+        b_id = b.id
+        s = State()
+        s_id = s.id
+        u = User()
+        u_id = u.id
+        a = Amenity()
+        a_id = a.id
+        r = Review()
+        r_id = r.id
+        c = City()
+        c_id = c.id
+        p = Place()
+        p_id = p.id
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.show(" + b_id + ")")
+            self.assertIn('BaseModel', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("State.show(" + s_id + ")")
+            self.assertIn('State', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("User.show(" + u_id + ")")
+            self.assertIn('User', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Amenity.show(" + a_id + ")")
+            self.assertIn('Amenity', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Review.show(" + r_id + ")")
+            self.assertIn('Review', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("City.show(" + c_id + ")")
+            self.assertIn('City', o.getvalue())
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Place.show(" + p_id + ")")
+            self.assertIn('Place', o.getvalue())
+
+    def test_07_all(self):
         """Test to validate all works."""
         b = BaseModel()
         s = State()
@@ -71,7 +204,7 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("Place.all()")
             self.assertIn('Place', o.getvalue())
 
-    def test_09_count(self):
+    def test_08_count(self):
         """Test if count works"""
         b = BaseModel()
         s = State()
@@ -106,7 +239,29 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("Place.count()")
             self.assertEqual('1\n', o.getvalue())
 
-    def test_10_update(self):
+    def test_09_update_errors(self):
+        """Test to validate update errors."""
+        b = BaseModel()
+        b_id = b.id
+        output = "** class doesn't exist **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("MyModel.update()")
+            self.assertEqual(output, o.getvalue())
+        output = "** instance id missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.update()")
+            self.assertEqual(output, o.getvalue())
+        output = "** attribute name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('BaseModel.update("' + b.id + '")')
+            self.assertEqual(output, o.getvalue())
+        output = "** value missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd('BaseModel.update("' +
+                                 b.id + '", "first_name")')
+            self.assertEqual(output, o.getvalue())
+
+    def test_09_update(self):
         """Test to validate update works."""
         b = BaseModel()
         b_id = b.id
