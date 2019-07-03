@@ -131,7 +131,6 @@ class Console_Test(unittest.TestCase):
         p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
         prog = re.compile(p)
         self.assertNotEqual(None, prog.match(output.getvalue()))
-        sys.stdout = sys.__stdout__
 
     def test_05a_create_bad_value(self):
         """Test to validate create with bad value."""
