@@ -128,6 +128,8 @@ class HBNBCommand(cmd.Cmd):
                 pass
             if k in models.storage.all():
                 setattr(models.storage.all()[k], params[2], params[3])
+            else:
+                return(print("** no instance found **"))
 
     def do_count(self, args):
         """Retrieves the number of instances of a class"""
