@@ -17,6 +17,7 @@ from models.place import Place
 from models.review import Review
 from console import HBNBCommand
 from io import StringIO
+import re
 
 
 class Console_Test(unittest.TestCase):
@@ -30,6 +31,11 @@ class Console_Test(unittest.TestCase):
         """Test to validate quit works."""
         with patch("sys.stdout", new=StringIO()) as o:
             self.assertTrue(HBNBCommand().onecmd("quit"))
+
+    def test_01_EOF(self):
+        """Test to validate EOF works."""
+        with patch("sys.stdout", new=StringIO()) as o:
+            self.assertTrue(HBNBCommand().onecmd("EOF"))
 
     def test_02_help(self):
         """Test to validate help works."""
@@ -97,6 +103,64 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("create MyModel")
             self.assertEqual(output, o.getvalue())
+
+    def test_03_create(self):
+        """Validate create functionality"""
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create BaseModel")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create User")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create State")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create City")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Amenity")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Place")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create Review")
+            i_d = o.getvalue()
+            p = r'(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})'
+            prog = re.compile(p)
+            match = prog.match(i_d)
+            self.assertTrue(match is not None)
 
     def test_03_destroy_errors(self):
         """Test to validate destroy errors."""
