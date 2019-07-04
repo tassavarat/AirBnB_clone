@@ -103,10 +103,13 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id"""
         params = sp(args)
         if len(params) == 0:
-            print("** class name missing **")
-        elif len(params) == 1:
-            print("** instance id missing **")
-        elif len(params) == 2:
+            return(print("** class name missing **"))
+        if len(params) == 1:
+            return(print("** instance id missing **"))
+        k = params[0] + "." + params[1]
+        if k not in models.storage.all().keys():
+            return(print("** no instance found **"))
+        if len(params) == 2:
             print("** attribute name missing **")
         elif len(params) == 3:
             print("** value missing **")
