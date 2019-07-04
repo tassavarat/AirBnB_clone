@@ -104,6 +104,8 @@ class HBNBCommand(cmd.Cmd):
         params = sp(args)
         if len(params) == 0:
             return(print("** class name missing **"))
+        if params[0] not in HBNBCommand.valid_models:
+            return(print("** class doesn't exist **"))
         if len(params) == 1:
             return(print("** instance id missing **"))
         k = params[0] + "." + params[1]
@@ -113,8 +115,6 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(params) == 3:
             print("** value missing **")
-        elif params[0] not in HBNBCommand.valid_models:
-            print("** class doesn't exist **")
         else:
             k = params[0] + '.' + params[1]
             val = params[3]
