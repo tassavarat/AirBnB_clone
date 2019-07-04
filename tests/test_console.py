@@ -446,11 +446,6 @@ class Console_Test(unittest.TestCase):
 
         output = "** no instance found **\n"
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd("BaseModel.update(\"2\", \"name\", \"Tu\")")
-            self.assertEqual(output, o.getvalue())
-
-        output = "** no instance found **\n"
-        with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("BaseModel.update(\"223432423\")")
             self.assertEqual(output, o.getvalue())
 
