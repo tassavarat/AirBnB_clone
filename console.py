@@ -106,9 +106,9 @@ class HBNBCommand(cmd.Cmd):
             return(print("** class name missing **"))
         if len(params) == 1:
             return(print("** instance id missing **"))
-        k = params[0] + "." + params[1]
-        if k not in models.storage.all().keys():
-            return(print("** no instance found **"))
+        #k = params[0] + "." + params[1]
+        #if k not in models.storage.all().keys():
+        #    return(print("** no instance found **"))
         if len(params) == 2:
             print("** attribute name missing **")
         elif len(params) == 3:
