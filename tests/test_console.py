@@ -37,6 +37,14 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
+    def test_01_empty_line(self):
+        """Validates empty line functionality."""
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("all")
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("\n")
+            self.assertEqual('', o.getvalue())
+
     def test_02_help(self):
         """Test to validate help works."""
         output = "\nDocumented commands (type help <topic>):\n"\
