@@ -65,6 +65,12 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("help destroy")
             self.assertEqual(output, o.getvalue())
 
+        output = "List available commands with \"help\" or detailed help "\
+            + "with \"help cmd\".\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help help")
+            self.assertEqual(output, o.getvalue())
+
         output = "Quit command to exit the program\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help quit")
@@ -82,6 +88,11 @@ class Console_Test(unittest.TestCase):
 
     def test_03_destroy_errors(self):
         """Test to validate destroy errors."""
+        output = "** class name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("destroy")
+            self.assertEqual(output, o.getvalue())
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("MyModel.destroy()")
