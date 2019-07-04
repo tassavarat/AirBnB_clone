@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for Amenity
+Unittest for Amenity class
 """
 
 import unittest
@@ -20,64 +20,64 @@ class Amenity_Test(unittest.TestCase):
 
     def test_00_valid_user(self):
         """Test to validate a user."""
-        u = Amenity()
-        self.assertEqual(u.__class__.__name__, "Amenity")
+        a  = Amenity()
+        self.assertEqual(a.__class__.__name__, "Amenity")
 
     def test_01_no_args(self):
         """Test for no arguments passed into Amenity"""
-        u = Amenity()
-        self.assertTrue(hasattr(u, "id"))
-        self.assertTrue(hasattr(u, "created_at"))
-        self.assertTrue(hasattr(u, "updated_at"))
-        self.assertTrue(hasattr(u, "name"))
+        a = Amenity()
+        self.assertTrue(hasattr(a, "id"))
+        self.assertTrue(hasattr(a, "created_at"))
+        self.assertTrue(hasattr(a, "updated_at"))
+        self.assertTrue(hasattr(a, "name"))
 
     def test_02_correct_types_in_args(self):
         """Test for correct types in args"""
-        u = Amenity()
-        self.assertEqual(type(u.id), str)
-        self.assertEqual(type(u.name), str)
-        self.assertEqual(u.created_at.__class__.__name__, "datetime")
-        self.assertEqual(u.updated_at.__class__.__name__, "datetime")
+        a = Amenity()
+        self.assertEqual(type(a.id), str)
+        self.assertEqual(type(a.name), str)
+        self.assertEqual(a.created_at.__class__.__name__, "datetime")
+        self.assertEqual(a.updated_at.__class__.__name__, "datetime")
 
     def test_03_adding_extra_parameters(self):
         """Test for manually adding parameters to empty BaseModel"""
-        u = Amenity()
-        u.string = "Tu"
-        u.number = 1106
-        u.list = [1, 2, 3]
-        u.dict = {"a": 1}
-        self.assertTrue(hasattr(u, "string"))
-        self.assertTrue(hasattr(u, "number"))
-        self.assertTrue(hasattr(u, "list"))
-        self.assertTrue(hasattr(u, "dict"))
-        self.assertEqual(type(u.string), str)
-        self.assertEqual(type(u.number), int)
-        self.assertEqual(type(u.list), list)
-        self.assertEqual(type(u.dict), dict)
+        a = Amenity()
+        a.string = "Tu"
+        a.number = 1106
+        a.list = [1, 2, 3]
+        a.dict = {"a": 1}
+        self.assertTrue(hasattr(a, "string"))
+        self.assertTrue(hasattr(a, "number"))
+        self.assertTrue(hasattr(a, "list"))
+        self.assertTrue(hasattr(a, "dict"))
+        self.assertEqual(type(a.string), str)
+        self.assertEqual(type(a.number), int)
+        self.assertEqual(type(a.list), list)
+        self.assertEqual(type(a.dict), dict)
 
     def test_04_str(self):
         """Test to validate __str__ method is working properly"""
-        u = Amenity()
+        a = Amenity()
         p = r'(^\[Amenity]) (\(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\)) (\{.*}$)'
         prog = re.compile(p)
-        match = prog.match(str(u))
+        match = prog.match(str(a))
         self.assertTrue(match is not None)
 
     def test_05_save(self):
         """Test to validate that updated_at is changed when saved"""
-        u = Amenity()
-        first_time = u.updated_at
+        a = Amenity()
+        first_time = a.updated_at
         sleep(.5)
-        u.save()
-        second_time = u.updated_at
+        a.save()
+        second_time = a.updated_at
         self.assertNotEqual(first_time, second_time)
 
     def test_06_to_dict(self):
         """Test to validate to_dict is outputting correctly"""
-        u = Amenity()
-        u.name = "Tu"
-        u.number = 1987
-        d = u.to_dict()
+        a = Amenity()
+        a.name = "Tu"
+        a.number = 1987
+        d = a.to_dict()
         self.assertTrue('number' in d)
         self.assertTrue('name' in d)
         self.assertTrue('id' in d)
@@ -87,10 +87,10 @@ class Amenity_Test(unittest.TestCase):
 
     def test_06a_to_dict_values(self):
         """Test to validate to_dict values are all strings"""
-        u = Amenity()
-        u.name = "Tu"
-        u.number = 1987
-        d = u.to_dict()
+        a = Amenity()
+        a.name = "Tu"
+        a.number = 1987
+        d = a.to_dict()
         self.assertEqual(type(d['name']), str)
         self.assertEqual(type(d['number']), int)
         self.assertEqual(type(d['created_at']), str)
@@ -100,18 +100,18 @@ class Amenity_Test(unittest.TestCase):
 
     def test_07_recreate_instance(self):
         """Test to create instances from to_dict"""
-        u = Amenity()
-        u.name = "Tim"
-        u.number = 1993
-        d = u.to_dict()
-        new_u = Amenity(**d)
-        self.assertEqual(u.id, new_u.id)
-        self.assertEqual(u.created_at, new_u.created_at)
-        self.assertEqual(u.updated_at, new_u.updated_at)
-        self.assertEqual(u.name, new_u.name)
-        self.assertEqual(u.number, new_u.number)
-        self.assertEqual(type(new_u.id), str)
-        self.assertEqual(new_u.created_at.__class__.__name__, "datetime")
+        a = Amenity()
+        a.name = "Tim"
+        a.number = 1993
+        d = a.to_dict()
+        new_a = Amenity(**d)
+        self.assertEqual(a.id, new_a.id)
+        self.assertEqual(a.created_at, new_a.created_at)
+        self.assertEqual(a.updated_at, new_a.updated_at)
+        self.assertEqual(a.name, new_a.name)
+        self.assertEqual(a.number, new_a.number)
+        self.assertEqual(type(new_a.id), str)
+        self.assertEqual(new_a.created_at.__class__.__name__, "datetime")
 
 
 if __name__ == '__main__':
