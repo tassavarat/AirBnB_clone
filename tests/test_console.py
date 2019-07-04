@@ -39,30 +39,42 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help")
             self.assertEqual(output, o.getvalue())
+
         output = "Quit command to exit the program\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help EOF")
             self.assertEqual(output, o.getvalue())
+
+        output = "Prints all str repr of all instances of class name\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("help all")
+            self.assertEqual(output, o.getvalue())
+
         output = "Retrieves the number of instances of a class\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help count")
             self.assertEqual(output, o.getvalue())
+
         output = "Creates a new instance, saves it, and prints id\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help create")
             self.assertEqual(output, o.getvalue())
+
         output = "Deletes an instance based on the class name and id\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help destroy")
             self.assertEqual(output, o.getvalue())
+
         output = "Quit command to exit the program\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help quit")
             self.assertEqual(output, o.getvalue())
+
         output = "Prints the str repr of an instance with class name and id\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help show")
             self.assertEqual(output, o.getvalue())
+
         output = "Updates an instance based on the class name and id\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("help update")
