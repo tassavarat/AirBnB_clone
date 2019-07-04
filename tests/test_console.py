@@ -161,6 +161,11 @@ class Console_Test(unittest.TestCase):
 
     def test_05_show_errors(self):
         """Test to validate destroy errors."""
+        output = "** class name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("show")
+            self.assertEqual(output, o.getvalue())
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("MyModel.show()")
@@ -219,6 +224,13 @@ class Console_Test(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("Place.show(" + p_id + ")")
             self.assertIn('Place', o.getvalue())
+
+    def test_07_all_errors(self):
+        """Validating all errors."""
+        output = "** class doesn't exist **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("all MyModel")
+            self.assertEqual(output, o.getvalue())
 
     def test_07_all(self):
         """Test to validate all works."""
@@ -333,6 +345,11 @@ class Console_Test(unittest.TestCase):
         """Test to validate update errors."""
         b = BaseModel()
         b_id = b.id
+        output = "** class name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("MyModel.update()")
+            self.assertEqual(output, o.getvalue())
+
         output = "** class doesn't exist **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("MyModel.update()")
