@@ -86,6 +86,18 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("help update")
             self.assertEqual(output, o.getvalue())
 
+    def test_02_create_errors(self):
+        """Validate create errors."""
+        output = "** class name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create")
+            self.assertEqual(output, o.getvalue())
+
+        output = "** class doesn't exist **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("create MyModel")
+            self.assertEqual(output, o.getvalue())
+
     def test_03_destroy_errors(self):
         """Test to validate destroy errors."""
         output = "** class name missing **\n"
