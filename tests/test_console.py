@@ -472,6 +472,13 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("BaseModel.update()")
             self.assertEqual(output, o.getvalue())
 
+        """
+        output = "** no instance found **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("update BaseModel 1231231")
+            self.assertEqual(output, o.getvalue())
+        """
+
         output = "** no instance found **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("BaseModel.update(\"2\", \"name\", \"Tu\")")
@@ -480,6 +487,16 @@ class Console_Test(unittest.TestCase):
         output = "** value missing **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("BaseModel.update(" + b.id + ", \"name\")")
+            self.assertEqual(output, o.getvalue())
+
+        output = "** value missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.update(\"2\", \"name\")")
+            self.assertEqual(output, o.getvalue())
+
+        output = "** attribute name missing **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.update(\"223432423\")")
             self.assertEqual(output, o.getvalue())
 
         output = "** attribute name missing **\n"
@@ -729,24 +746,6 @@ class Console_Test(unittest.TestCase):
             self.assertIn('John', o.getvalue())
             self.assertIn('89', o.getvalue())
             self.assertIn('12.3', o.getvalue())
-
-    """
-    def test_09_update_dict(self):
-        output = "** no instance found **\n"
-        with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd("update BaseModel 1231231")
-            self.assertEqual(output, o.getvalue())
-
-        output = "** value missing **\n"
-        with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd("BaseModel.update(\"2\", \"name\")")
-            self.assertEqual(output, o.getvalue())
-
-        output = "** attribute name missing **\n"
-        with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd("BaseModel.update(\"223432423\")")
-            self.assertEqual(output, o.getvalue())
-    """
 
 
 if __name__ == '__main__':
