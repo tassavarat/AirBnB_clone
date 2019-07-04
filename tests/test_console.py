@@ -355,6 +355,34 @@ class Console_Test(unittest.TestCase):
 
     def test_08_count(self):
         """Test if count works"""
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("BaseModel.count()")
+            self.assertEqual('0\n', o.getvalue())
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("User.count()")
+            self.assertEqual('0\n', o.getvalue())
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("State.count()")
+            self.assertEqual('0\n', o.getvalue())
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("City.count()")
+            self.assertEqual('0\n', o.getvalue())
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Amenity.count()")
+            self.assertEqual('0\n', o.getvalue())
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Place.count()")
+            self.assertEqual('0\n', o.getvalue())
+
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("Review.count()")
+            self.assertEqual('0\n', o.getvalue())
+
         b = BaseModel()
         s = State()
         u = User()
@@ -442,6 +470,11 @@ class Console_Test(unittest.TestCase):
         output = "** instance id missing **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("BaseModel.update()")
+            self.assertEqual(output, o.getvalue())
+
+        output = "** no instance found **\n"
+        with patch("sys.stdout", new=StringIO()) as o:
+            HBNBCommand().onecmd("update BaseModel 1231231")
             self.assertEqual(output, o.getvalue())
 
         output = "** no instance found **\n"
@@ -628,59 +661,89 @@ class Console_Test(unittest.TestCase):
         """Validating dictionary update."""
         b = BaseModel()
         b_id = b.id
-        s = State()
-        s_id = s.id
         u = User()
         u_id = u.id
-        a = Amenity()
-        a_id = a.id
-        r = Review()
-        r_id = r.id
+        s = State()
+        s_id = s.id
         c = City()
         c_id = c.id
+        a = Amenity()
+        a_id = a.id
         p = Place()
         p_id = p.id
+        r = Review()
+        r_id = r.id
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd('BaseModel.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
             self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("BaseModel.show(" + b_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('State.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+            HBNBCommand().onecmd('User.update("' + u_id +
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
-            self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("User.show(" + u_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('User.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+            HBNBCommand().onecmd('State.update("' + s_id +
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
             self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("State.show(" + s_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('Amenity.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+            HBNBCommand().onecmd('City.update("' + c_id +
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
-            self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("City.show(" + c_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('Review.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+            HBNBCommand().onecmd('Amenity.update("' + a_id +
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
-            self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("Amenity.show(" + a_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('City.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+            HBNBCommand().onecmd('Place.update("' + p_id +
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
-            self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("Place.show(" + p_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd('Place.update("' + b_id +
-                                 '", {\'fn\': "John", "age": 89})')
+            HBNBCommand().onecmd('Review.update("' + r_id +
+                                 '", {\'fn\': "John", "age": 89, "w": 12.3})')
             self.assertTrue(hasattr(b, 'fn'))
-            self.assertTrue(hasattr(b, 'age'))
+            self.assertTrue(hasattr(b, 'w'))
+            HBNBCommand().onecmd("Review.show(" + r_id + ")")
+            self.assertIn('John', o.getvalue())
+            self.assertIn('89', o.getvalue())
+            self.assertIn('12.3', o.getvalue())
 
 
 if __name__ == '__main__':
