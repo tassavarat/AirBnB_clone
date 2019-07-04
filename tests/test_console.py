@@ -347,7 +347,7 @@ class Console_Test(unittest.TestCase):
         b_id = b.id
         output = "** class name missing **\n"
         with patch("sys.stdout", new=StringIO()) as o:
-            HBNBCommand().onecmd("MyModel.update()")
+            HBNBCommand().onecmd("update")
             self.assertEqual(output, o.getvalue())
 
         output = "** class doesn't exist **\n"
