@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for State
+Unittest for State class.
 """
 
 import unittest

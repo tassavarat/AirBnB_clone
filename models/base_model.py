@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This module contains the prototype for BaseModel class
+This module contains the prototype for BaseModel class.
 """
 
 import models

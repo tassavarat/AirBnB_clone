@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for Amenity class
+Unittest for Amenity class.
 """
 
 import unittest
@@ -20,7 +20,7 @@ class Amenity_Test(unittest.TestCase):
 
     def test_00_valid_user(self):
         """Test to validate a user."""
-        a  = Amenity()
+        a = Amenity()
         self.assertEqual(a.__class__.__name__, "Amenity")
 
     def test_01_no_args(self):

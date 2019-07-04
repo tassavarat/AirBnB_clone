@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This module contains the prototype for FileStorage class
+This module contains the prototype for FileStorage class.
 """
 
 

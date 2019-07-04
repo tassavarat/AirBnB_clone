@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for Place
+Unittest for Place class.
 """
 
 import unittest
