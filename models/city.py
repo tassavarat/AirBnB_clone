@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This is a module for the city class
+This module contains the prototype for City class.
 """
 
 from models.base_model import BaseModel

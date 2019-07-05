@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This is a module for the review class
+This module contains the prototype for Review class.
 """
 
 from models.base_model import BaseModel

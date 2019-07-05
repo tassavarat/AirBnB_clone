@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This module contains the user class
+This module contains the prototype for User class.
 """
 
 from models.base_model import BaseModel

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for FileStorage
+Unittest for FileStorage class.
 """
 
 import unittest
@@ -120,7 +120,7 @@ class FileStorage_Test(unittest.TestCase):
         with self.assertRaises(AttributeError):
             fs.new(float("nan"))
 
-    def test_09_new_string(self):
+    def test_10_new_string(self):
         """Passes string to new"""
         fs = FileStorage()
         with self.assertRaises(AttributeError):

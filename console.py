@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Entry point of the command interpreter"""
+
+"""
+Entry point of the command interpreter.
+"""
+
 import cmd
 from shlex import split as sp
 from models.base_model import BaseModel

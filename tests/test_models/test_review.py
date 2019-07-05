@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for Review
+Unittest for Review class.
 """
 
 import unittest
@@ -20,68 +20,68 @@ class Review_Test(unittest.TestCase):
 
     def test_00_valid_user(self):
         """Test to validate a user."""
-        u = Review()
-        self.assertEqual(u.__class__.__name__, "Review")
+        r = Review()
+        self.assertEqual(r.__class__.__name__, "Review")
 
     def test_01_no_args(self):
         """Test for no arguments passed into Review"""
-        u = Review()
-        self.assertTrue(hasattr(u, "id"))
-        self.assertTrue(hasattr(u, "created_at"))
-        self.assertTrue(hasattr(u, "updated_at"))
-        self.assertTrue(hasattr(u, "place_id"))
-        self.assertTrue(hasattr(u, "user_id"))
-        self.assertTrue(hasattr(u, "text"))
+        r = Review()
+        self.assertTrue(hasattr(r, "id"))
+        self.assertTrue(hasattr(r, "created_at"))
+        self.assertTrue(hasattr(r, "updated_at"))
+        self.assertTrue(hasattr(r, "place_id"))
+        self.assertTrue(hasattr(r, "user_id"))
+        self.assertTrue(hasattr(r, "text"))
 
     def test_02_correct_types_in_args(self):
         """Test for correct types in args"""
-        u = Review()
-        self.assertEqual(type(u.id), str)
-        self.assertEqual(type(u.place_id), str)
-        self.assertEqual(type(u.user_id), str)
-        self.assertEqual(type(u.text), str)
-        self.assertEqual(u.created_at.__class__.__name__, "datetime")
-        self.assertEqual(u.updated_at.__class__.__name__, "datetime")
+        r = Review()
+        self.assertEqual(type(r.id), str)
+        self.assertEqual(type(r.place_id), str)
+        self.assertEqual(type(r.user_id), str)
+        self.assertEqual(type(r.text), str)
+        self.assertEqual(r.created_at.__class__.__name__, "datetime")
+        self.assertEqual(r.updated_at.__class__.__name__, "datetime")
 
     def test_03_adding_extra_parameters(self):
         """Test for manually adding parameters to empty BaseModel"""
-        u = Review()
-        u.string = "Tu"
-        u.number = 1106
-        u.list = [1, 2, 3]
-        u.dict = {"a": 1}
-        self.assertTrue(hasattr(u, "string"))
-        self.assertTrue(hasattr(u, "number"))
-        self.assertTrue(hasattr(u, "list"))
-        self.assertTrue(hasattr(u, "dict"))
-        self.assertEqual(type(u.string), str)
-        self.assertEqual(type(u.number), int)
-        self.assertEqual(type(u.list), list)
-        self.assertEqual(type(u.dict), dict)
+        r = Review()
+        r.string = "Tu"
+        r.number = 1106
+        r.list = [1, 2, 3]
+        r.dict = {"a": 1}
+        self.assertTrue(hasattr(r, "string"))
+        self.assertTrue(hasattr(r, "number"))
+        self.assertTrue(hasattr(r, "list"))
+        self.assertTrue(hasattr(r, "dict"))
+        self.assertEqual(type(r.string), str)
+        self.assertEqual(type(r.number), int)
+        self.assertEqual(type(r.list), list)
+        self.assertEqual(type(r.dict), dict)
 
     def test_04_str(self):
         """Test to validate __str__ method is working properly"""
-        u = Review()
+        r = Review()
         p = r'(^\[Review]) (\(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\)) (\{.*}$)'
         prog = re.compile(p)
-        match = prog.match(str(u))
+        match = prog.match(str(r))
         self.assertTrue(match is not None)
 
     def test_05_save(self):
         """Test to validate that updated_at is changed when saved"""
         u = Review()
-        first_time = u.updated_at
+        first_time = r.updated_at
         sleep(.5)
-        u.save()
-        second_time = u.updated_at
+        r.save()
+        second_time = r.updated_at
         self.assertNotEqual(first_time, second_time)
 
     def test_06_to_dict(self):
         """Test to validate to_dict is outputting correctly"""
-        u = Review()
-        u.name = "Tu"
-        u.number = 1987
-        d = u.to_dict()
+        r = Review()
+        r.name = "Tu"
+        r.number = 1987
+        d = r.to_dict()
         self.assertTrue('number' in d)
         self.assertTrue('name' in d)
         self.assertTrue('id' in d)
@@ -91,10 +91,10 @@ class Review_Test(unittest.TestCase):
 
     def test_06a_to_dict_values(self):
         """Test to validate to_dict values are all strings"""
-        u = Review()
-        u.name = "Tu"
-        u.number = 1987
-        d = u.to_dict()
+        r = Review()
+        r.name = "Tu"
+        r.number = 1987
+        d = r.to_dict()
         self.assertEqual(type(d['name']), str)
         self.assertEqual(type(d['number']), int)
         self.assertEqual(type(d['created_at']), str)
@@ -104,18 +104,18 @@ class Review_Test(unittest.TestCase):
 
     def test_07_recreate_instance(self):
         """Test to create instances from to_dict"""
-        u = Review()
-        u.name = "Tim"
-        u.number = 1993
-        d = u.to_dict()
-        new_u = Review(**d)
-        self.assertEqual(u.id, new_u.id)
-        self.assertEqual(u.created_at, new_u.created_at)
-        self.assertEqual(u.updated_at, new_u.updated_at)
-        self.assertEqual(u.name, new_u.name)
-        self.assertEqual(u.number, new_u.number)
-        self.assertEqual(type(new_u.id), str)
-        self.assertEqual(new_u.created_at.__class__.__name__, "datetime")
+        r = Review()
+        r.name = "Tim"
+        r.number = 1993
+        d = r.to_dict()
+        new_r = Review(**d)
+        self.assertEqual(r.id, new_r.id)
+        self.assertEqual(r.created_at, new_r.created_at)
+        self.assertEqual(r.updated_at, new_r.updated_at)
+        self.assertEqual(r.name, new_r.name)
+        self.assertEqual(r.number, new_r.number)
+        self.assertEqual(type(new_r.id), str)
+        self.assertEqual(new_r.created_at.__class__.__name__, "datetime")
 
 
 if __name__ == '__main__':

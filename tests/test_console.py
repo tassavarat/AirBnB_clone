@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Unittest for the Console class
+Unittest for the Console class.
 """
 
 import unittest
