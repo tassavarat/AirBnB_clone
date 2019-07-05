@@ -103,22 +103,31 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id"""
         params = sp(args)
         if len(params) == 0:
-            print("** class name missing **")
-        elif len(params) == 1:
-            print("** instance id missing **")
-        elif len(params) == 2:
+            return(print("** class name missing **"))
+        if params[0] not in HBNBCommand.valid_models:
+            return(print("** class doesn't exist **"))
+        if len(params) == 1:
+            return(print("** instance id missing **"))
+        k = params[0] + "." + params[1]
+        if k not in models.storage.all().keys():
+            return(print("** no instance found **"))
+        if len(params) == 2:
             print("** attribute name missing **")
         elif len(params) == 3:
             print("** value missing **")
-        elif params[0] not in HBNBCommand.valid_models:
-            print("** class doesn't exist **")
         else:
             k = params[0] + '.' + params[1]
+            val = params[3]
+            try:
+                if val.isdigit():
+                    val = int(val)
+                elif float(val):
+                    val = float(val)
+            except ValueError:
+                pass
             if k in models.storage.all():
                 setattr(models.storage.all()[k], params[2], params[3])
                 models.storage.save()
-            else:
-                print("** no instance found **")
 
     def do_count(self, args):
         """Retrieves the number of instances of a class"""
@@ -155,7 +164,8 @@ class HBNBCommand(cmd.Cmd):
         cls_name = inp.split('.')[0]
         if cls_name not in HBNBCommand.valid_models:
             return(print("** class doesn't exist **"))
-        cmd = inp.split('.')[1]
+        idx = inp.index('.')
+        cmd = inp[idx + 1:]
         if '(' not in cmd and ')' not in cmd:
             return(print("** invalid input **"))
         cmd_left = cmd.split('(')[0]

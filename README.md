@@ -66,7 +66,16 @@ EOF  help  quit
 $
 ```
 
+## Testing
+
+* All unittests can be executed with:
+
+```
+python3 -m unittest discover tests
+```
+
 ---
+
 ## Tasks
 
 ### [ 0. README, AUTHORS ](./README.md)
