@@ -472,12 +472,10 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("BaseModel.update()")
             self.assertEqual(output, o.getvalue())
 
-        """
         output = "** no instance found **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("update BaseModel 1231231")
             self.assertEqual(output, o.getvalue())
-        """
 
         output = "** no instance found **\n"
         with patch("sys.stdout", new=StringIO()) as o:
@@ -489,19 +487,15 @@ class Console_Test(unittest.TestCase):
             HBNBCommand().onecmd("BaseModel.update(" + b.id + ", \"name\")")
             self.assertEqual(output, o.getvalue())
 
-        """
-        output = "** value missing **\n"
+        output = "** no instance found **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("BaseModel.update(\"2\", \"name\")")
             self.assertEqual(output, o.getvalue())
-        """
 
-        """
-        output = "** attribute name missing **\n"
+        output = "** no instance found **\n"
         with patch("sys.stdout", new=StringIO()) as o:
             HBNBCommand().onecmd("BaseModel.update(\"223432423\")")
             self.assertEqual(output, o.getvalue())
-        """
 
         output = "** attribute name missing **\n"
         with patch("sys.stdout", new=StringIO()) as o:
