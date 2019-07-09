@@ -69,7 +69,7 @@ class Review_Test(unittest.TestCase):
 
     def test_05_save(self):
         """Test to validate that updated_at is changed when saved"""
-        u = Review()
+        r = Review()
         first_time = r.updated_at
         sleep(.5)
         r.save()
