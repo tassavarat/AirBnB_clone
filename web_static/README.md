@@ -107,6 +107,7 @@ Requirements:
 	* `styles/3-common.css`: for the global style (i.e `body` style)
 	* `styles/3-header.css`: for the header style
 	* `styles/3-footer.css`: for the footer style
+![3 example output](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/3-index.png)
 
 
 ### [4. Search!](./4-index.html)
