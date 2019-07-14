@@ -43,6 +43,7 @@ Requirements:
 * You are not allowed to import any files
 * You are not allowed to use the `style` tag in the `head` tag
 * Use inline styling for all your tags
+![0-example_output]
 (https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/0-index.png)
 
 
