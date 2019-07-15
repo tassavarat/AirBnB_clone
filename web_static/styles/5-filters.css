@@ -22,11 +22,14 @@
 .locations h3, .amenities h3
 {
 	font-weight: 600;
+	margin-left: 50px;
 }
 .locations h4, .amenities h4
 {
 	font-weight: 400;
 	font-size: 14px;
+	margin-left: 50px;
+	margin-top: -15px;
 }
 button
 {
@@ -43,7 +46,6 @@ button
 	transform: translateY(-50%);
 	float: right;
 	margin-right: 30px;
-	order: 2;
 }
 button:hover
 {
