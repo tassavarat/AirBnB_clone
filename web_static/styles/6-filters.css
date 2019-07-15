@@ -38,6 +38,7 @@
 	border-radius: 4px;
 	list-style-type: none;
 	padding-bottom: 20px;
+	display: none;
 }
 .popover h2
 {
@@ -51,9 +52,23 @@
 	margin-top: -15px;
 	margin-bottom: 40px;
 }
-.amenities .popover ul
+.locations:hover .popover
 {
-	margin-left: 300px;
+	display: block;
+}
+.amenities .popover
+{
+	padding-right: 300px;
+	padding-bottom: 40px;
+}
+.amenities .popover li
+{
+	margin-top: 20px;
+	margin-left: 10px;
+}
+.amenities:hover .popover
+{
+	display: block;
 }
 button
 {
