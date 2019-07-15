@@ -1,12 +1,9 @@
-.places
-{
-	position: relative;
-	vertical-align: top;
-}
 .places h1
 {
 	text-align: left;
 	font-size: 30px;
+	margin-top: 60px;
+	margin-left: 30px;
 }
 .places article
 {
