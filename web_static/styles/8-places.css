@@ -1,14 +1,17 @@
-.places
+.flex_start
 {
-	position: relative;
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 .places h1
 {
 	text-align: left;
+	align-self: flex-start;
 	font-size: 30px;
 	margin-top: 60px;
 	margin-left: 30px;
+
 }
 .places article
 {
@@ -72,7 +75,11 @@
 	background-repeat: no-repeat;
 	background-position: center 15px;
 }
-.user p, .description p
+.user p 
+{
+	text-align: left;
+}
+.description p
 {
 	text-align: left;
 }
